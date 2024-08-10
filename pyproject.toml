@@ -23,7 +23,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.coverage.run]
 branch = true
-command_line = "-m pytest tests"
+command_line = "-m pytest src/pytest_matchers/tests"
 
 [tool.coverage.report]
 show_missing = true
@@ -33,7 +33,7 @@ exclude_also = ["@abstractmethod"]
 output = "coverage.xml"
 
 [tool.vulture]
-paths = ["src", "tests", "vulture/whitelist.py"]
+paths = ["src", "vulture/whitelist.py"]
 ignore_decorators = []
 ignore_names = ['pytestmark', 'cls', 'return_value', 'side_effect']
 sort_by_size = true

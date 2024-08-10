@@ -1,1 +1,1 @@
-echo "src tests"
+echo "src"
