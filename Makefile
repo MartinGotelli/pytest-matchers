@@ -56,7 +56,7 @@ spell:
 	codespell
 
 tests:
-	pytest tests
+	pytest src/pytest_matchers/tests
 
 requirements: validate_env
 	@make requirements_dev
