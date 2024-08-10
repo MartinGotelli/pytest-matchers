@@ -1,6 +1,6 @@
 FOLDERS = $(shell scripts/python_folders.sh)
 
-.PHONY: quality format coverage lint vulture spell integration_tests tests requirements
+.PHONY: quality format coverage lint vulture spell tests requirements
 
 default: help
 
@@ -34,16 +34,16 @@ install_shell_support:
 quality: lint vulture spell black tests
 
 format:
-	poetry run black $(FOLDERS)
+	black $(FOLDERS)
 
 black:
-	poetry run black -q --check $(FOLDERS)
+	black -q --check $(FOLDERS)
 
 coverage:
-	poetry run coverage run && coverage report --skip-covered
+	coverage run && coverage report --skip-covered
 
 coverage_html:
-	poetry run coverage run && coverage html
+	coverage run && coverage html
 	open htmlcov/index.html
 
 lint:
