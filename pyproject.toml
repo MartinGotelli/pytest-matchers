@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pytest-matchers"
-version = "0.0.1"
+version = "0.1.0"
 description = "Matchers for pytest"
 authors = ["MartinGotelli <martingotelliferenaz@gmail.com>"]
 readme = "README.md"

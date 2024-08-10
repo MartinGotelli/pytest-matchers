@@ -30,7 +30,7 @@ jobs:
         if [ -f requirements_dev.txt ]; then pip install -r requirements_dev.txt; fi
     - name: Lint with pylint
       run: |
-        make pylint
+        make lint
     - name: Test with pytest
       run: |
         make coverage
