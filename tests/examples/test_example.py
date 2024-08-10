@@ -1,3 +1,4 @@
+from datetime import datetime
 from random import random
 from unittest.mock import MagicMock
 
@@ -28,7 +29,7 @@ def test_mock_log_exception():
         try:
             raise ValueError("This is a test exception")
         except ValueError as error:
-            logging.exception(f"Caught exception: %s", error)
+            logging.exception("Caught exception: %s", error)
 
     mock_logging = MagicMock()
     _logging_function(mock_logging)
@@ -36,3 +37,18 @@ def test_mock_log_exception():
         "Caught exception: %s",
         is_instance(ValueError) & has_attribute("args", ("This is a test exception",)),
     )
+
+
+def test_datetime_comparison():
+    def _datetime_function():
+        return {"data": "some data", "created_at": datetime.now()}
+
+    expected_value = {
+        "data": "some data",
+        "created_at": is_instance(datetime),
+    }
+    first_data = _datetime_function()
+    assert first_data == expected_value
+    second_data = _datetime_function()
+    assert second_data == expected_value
+    assert first_data != second_data
