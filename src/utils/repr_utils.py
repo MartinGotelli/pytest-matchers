@@ -19,7 +19,7 @@ def concat_reprs(
     extra_repr = f" {separator} ".join(
         [_repr(extra_repr) for extra_repr in extra_reprs if extra_repr]
     )
-    if not base_repr:
+    if not base_repr and extra_repr:
         return extra_repr[0].upper() + extra_repr[1:]
     if extra_repr:
         return f"{base_repr} {extra_repr}"

@@ -1,0 +1,16 @@
+[MESSAGES CONTROL]
+
+disable=
+    missing-function-docstring,
+    missing-module-docstring,
+    missing-class-docstring,
+    too-many-ancestors,
+    cyclic-import
+
+[DESIGN]
+min-public-methods=1
+max-args=9
+
+[SIMILARITIES]
+min-similarity-lines=8
+ignore-comments=yes

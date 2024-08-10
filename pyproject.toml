@@ -12,7 +12,36 @@ python = "^3.11"
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.2"
 black = "^24.8.0"
+pylint = "^3.2.6"
+coverage = "^7.6.1"
+codespell = "^2.3.0"
+vulture = "^2.11"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.run]
+branch = true
+command_line = "-m pytest tests"
+
+[tool.coverage.report]
+show_missing = true
+exclude_also = ["@abstractmethod"]
+
+[tool.coverage.xml]
+output = "coverage.xml"
+
+[tool.vulture]
+paths = ["src", "tests", "vulture/whitelist.py"]
+ignore_decorators = []
+ignore_names = ['pytestmark', 'cls', 'return_value', 'side_effect']
+sort_by_size = true
+
+[tool.black]
+line-length = 100
+target-version = ['py311'] # Needs to be single quote, it is a regular expression
+
+[tool.codespell]
+skip= "./node_modules,./venv,./env,./htmlcov"
+ignore-words-list = "astroid"

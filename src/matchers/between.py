@@ -1,28 +1,24 @@
 from typing import Any
 
 from src.matchers import Matcher
-from utils.repr_utils import concat_reprs
+from src.utils.repr_utils import concat_reprs
 
 
 class Between(Matcher):
     def __init__(
         self,
-        min: Any,
-        max: Any,
+        min_value: Any,
+        max_value: Any,
         inclusive: bool = None,
         min_inclusive: bool = None,
         max_inclusive: bool = None,
     ):
-        if min is None and max is None:
+        if min_value is None and max_value is None:
             raise ValueError("At least one of min or max must be specified")
-        self._min = min
-        self._max = max
-        if inclusive is not None and (
-            min_inclusive is not None or max_inclusive is not None
-        ):
-            raise ValueError(
-                "Cannot specify inclusive and min_inclusive or max_inclusive"
-            )
+        self._min = min_value
+        self._max = max_value
+        if inclusive is not None and (min_inclusive is not None or max_inclusive is not None):
+            raise ValueError("Cannot specify inclusive and min_inclusive or max_inclusive")
         if inclusive is not None:
             min_inclusive, max_inclusive = inclusive, inclusive
         self._min_inclusive = min_inclusive or min_inclusive is None
@@ -78,7 +74,5 @@ class Between(Matcher):
         if not self._max:
             return ""
         return (
-            f"lower or equal than {self._max}"
-            if self._max_inclusive
-            else f"lower than {self._max}"
+            f"lower or equal than {self._max}" if self._max_inclusive else f"lower than {self._max}"
         )

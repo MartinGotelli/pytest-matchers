@@ -59,9 +59,9 @@ def test_matches_float_inclusive():
     assert matcher == 1
     assert matcher == 1.5
     assert matcher == 2
-    assert not matcher == 0
-    assert not matcher == 3
-    assert not matcher == "string"
+    assert matcher != 0
+    assert matcher != 3
+    assert matcher != "string"
 
 
 def test_matches_string_inclusive():
@@ -70,40 +70,49 @@ def test_matches_string_inclusive():
     assert matcher == "c"
     assert matcher == "d"
     assert matcher == "ca"
-    assert not matcher == "da"
-    assert not matcher == "z"
-    assert not matcher == 20
-    assert not matcher == ["a", "b"]
+    assert matcher != "da"
+    assert matcher != "z"
+    assert matcher != 20
+    assert matcher != ["a", "b"]
 
 
 def test_matches_float_exclusive():
     matcher = Between(1, 2, inclusive=False)
     assert matcher == 1.5
-    assert not matcher == 1
-    assert not matcher == 2
-    assert not matcher == 0
-    assert not matcher == 3
-    assert not matcher == "string"
+    assert matcher != 1
+    assert matcher != 2
+    assert matcher != 0
+    assert matcher != 3
+    assert matcher != "string"
 
 
 def test_matches_float_min_exclusive():
     matcher = Between(1, 2, min_inclusive=False)
     assert matcher == 1.5
     assert matcher == 2
-    assert not matcher == 1
-    assert not matcher == 0
-    assert not matcher == 3
-    assert not matcher == "string"
+    assert matcher != 1
+    assert matcher != 0
+    assert matcher != 3
+    assert matcher != "string"
 
 
 def test_matches_float_max_exclusive():
     matcher = Between(1, 2, max_inclusive=False)
     assert matcher == 1
     assert matcher == 1.5
-    assert not matcher == 2
-    assert not matcher == 0
-    assert not matcher == 3
-    assert not matcher == "string"
+    assert matcher != 2
+    assert matcher != 0
+    assert matcher != 3
+    assert matcher != "string"
+
+
+def test_matches_without_min():
+    matcher = Between(None, 2)
+    assert matcher == 1
+    assert matcher == 1.5
+    assert matcher == 2
+    assert matcher != 2.1
+    assert matcher != "string"
 
 
 def test_matches_without_max():
@@ -112,5 +121,5 @@ def test_matches_without_max():
     assert matcher == 1.5
     assert matcher == 2
     assert matcher == 30000
-    assert not matcher == 0
-    assert not matcher == "string"
+    assert matcher != 0
+    assert matcher != "string"

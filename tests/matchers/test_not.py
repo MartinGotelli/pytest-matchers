@@ -1,5 +1,4 @@
-from src.matchers import Eq, IsInstance
-from src.matchers.not_matcher import Not
+from src.matchers import Eq, IsInstance, Not
 
 
 def test_create():

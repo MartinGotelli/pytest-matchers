@@ -1,4 +1,4 @@
-from src.matchers.anything import Anything
+from src.matchers import Anything
 
 
 def test_create():
@@ -18,4 +18,4 @@ def test_matches():
     assert matcher == ["string"]
     assert matcher == {"key": "value"}
     assert matcher == object
-    assert matcher == len
+    assert matcher == len  # pylint: disable=comparison-with-callable

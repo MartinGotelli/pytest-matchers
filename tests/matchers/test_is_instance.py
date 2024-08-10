@@ -24,7 +24,7 @@ def test_matches():
     assert "string" == IsInstance(str)
     assert IsInstance(str) == "string"
     assert "string" == IsInstance(object)
-    assert not "string" == IsInstance(int)
+    assert "string" != IsInstance(int)
     assert 3 == IsInstance(int)
-    assert not 3 == IsInstance(str)
+    assert 3 != IsInstance(str)
     assert "string" != IsInstance(int)

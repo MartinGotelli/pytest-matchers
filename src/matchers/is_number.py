@@ -1,8 +1,8 @@
 from typing import Any, Type
 
 from src.matchers import Matcher
-from utils.matcher_utils import between_matcher, is_instance_matcher, matches_or_none
-from utils.repr_utils import concat_reprs
+from src.utils.matcher_utils import between_matcher, is_instance_matcher, matches_or_none
+from src.utils.repr_utils import concat_reprs
 
 
 class IsNumber(Matcher):
@@ -10,16 +10,16 @@ class IsNumber(Matcher):
         self,
         match_type: Type = None,
         *,
-        min: float = None,
-        max: float = None,
+        min_value: float = None,
+        max_value: float = None,
         inclusive: bool = None,
         min_inclusive: bool = None,
-        max_inclusive: bool = None
+        max_inclusive: bool = None,
     ):
         self._is_instance_matcher = is_instance_matcher(match_type)
         self._between_matcher = between_matcher(
-            min,
-            max,
+            min_value,
+            max_value,
             inclusive,
             min_inclusive,
             max_inclusive,

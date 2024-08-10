@@ -26,19 +26,19 @@ def test_matches_string():
     matcher = EndsWith("bc")
     assert matcher == "abc"
     assert matcher == "bc"
-    assert not matcher == "dabcx"
-    assert not matcher == ["x", "bc", "y"]
-    assert not matcher == "ac"
-    assert not matcher == ["abc"]
-    assert not matcher == 20
-    assert not matcher == ["x", "bc"]
+    assert matcher != "dabcx"
+    assert matcher != ["x", "bc", "y"]
+    assert matcher != "ac"
+    assert matcher != ["abc"]
+    assert matcher != 20
+    assert matcher != ["x", "bc"]
 
 
 def test_matches_list():
     matcher = EndsWith([1, 3])
     assert matcher == [2, 1, 3]
     assert matcher == [1, 3]
-    assert not matcher == [1, 20, 1, 3, 30]
-    assert not matcher == [10, 20, 30]
-    assert not matcher == "string"
-    assert not matcher == 20
+    assert matcher != [1, 20, 1, 3, 30]
+    assert matcher != [10, 20, 30]
+    assert matcher != "string"
+    assert matcher != 20

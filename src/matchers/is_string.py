@@ -1,14 +1,14 @@
 from typing import Any
 
 from src.matchers import IsInstance, Matcher
-from utils.matcher_utils import (
+from src.utils.matcher_utils import (
     contains_matcher,
     ends_with_matcher,
     length_matcher,
     matches_or_none,
     starts_with_matcher,
 )
-from utils.repr_utils import concat_reprs
+from src.utils.repr_utils import concat_reprs
 
 
 class IsString(Matcher):
@@ -25,7 +25,7 @@ class IsString(Matcher):
         self._starts_with_matcher = starts_with_matcher(starts_with)
         self._ends_with_matcher = ends_with_matcher(ends_with)
         self._contains_matcher = contains_matcher(contains)
-        self._length_matcher = length_matcher(length, max_length, min_length)
+        self._length_matcher = length_matcher(length, min_length, max_length)
 
     def matches(self, value: Any) -> bool:
         return (

@@ -38,8 +38,8 @@ def contains_matcher(contains: str | None) -> Contains | None:
 
 def length_matcher(
     length: int | None,
-    max_length: int | None,
     min_length: int | None,
+    max_length: int | None,
 ) -> Length | None:
     if length is None and max_length is None and min_length is None:
         return None
@@ -59,17 +59,17 @@ def ends_with_matcher(ends_with: str | None) -> EndsWith | None:
 
 
 def between_matcher(
-    min: float | None,
-    max: float | None,
+    min_value: float | None,
+    max_value: float | None,
     inclusive: bool | None,
     min_inclusive: bool | None,
     max_inclusive: bool | None,
 ) -> Between | None:
-    if min is None and max is None:
+    if min_value is None and max_value is None:
         return None
     return Between(
-        min,
-        max,
+        min_value,
+        max_value,
         inclusive=inclusive,
         min_inclusive=min_inclusive,
         max_inclusive=max_inclusive,

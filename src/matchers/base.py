@@ -1,11 +1,9 @@
+# pylint: disable=import-outside-toplevel
 from abc import ABC, abstractmethod
 from typing import Any
 
 
 class Matcher(ABC):
-    def __repr__(self):
-        return self.__class__.__name__
-
     def __eq__(self, other: Any) -> bool:
         return self.matches(other)
 

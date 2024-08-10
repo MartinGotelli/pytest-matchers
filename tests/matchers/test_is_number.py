@@ -8,15 +8,15 @@ def test_create():
     assert isinstance(matcher, IsNumber)
     matcher = IsNumber(int)
     assert isinstance(matcher, IsNumber)
-    matcher = IsNumber(min=1, max=2)
+    matcher = IsNumber(min_value=1, max_value=2)
     assert isinstance(matcher, IsNumber)
-    matcher = IsNumber(min=1, max=2, min_inclusive=False)
+    matcher = IsNumber(min_value=1, max_value=2, min_inclusive=False)
     assert isinstance(matcher, IsNumber)
     with pytest.raises(
         ValueError,
         match="Cannot specify inclusive and min_inclusive or max_inclusive",
     ):
-        IsNumber(min=1, max=2, inclusive=True, min_inclusive=True)
+        IsNumber(min_value=1, max_value=2, inclusive=True, min_inclusive=True)
 
 
 def test_repr():
@@ -24,15 +24,15 @@ def test_repr():
     assert repr(matcher) == "To be a number"
     matcher = IsNumber(int)
     assert repr(matcher) == "To be a number of 'int' instance"
-    matcher = IsNumber(min=1, max=2)
+    matcher = IsNumber(min_value=1, max_value=2)
     assert repr(matcher) == "To be a number between 1 and 2"
-    matcher = IsNumber(min=1, max=2, inclusive=False)
+    matcher = IsNumber(min_value=1, max_value=2, inclusive=False)
     assert repr(matcher) == "To be a number between 1 and 2 exclusive"
-    matcher = IsNumber(min=1, max=2, min_inclusive=False)
+    matcher = IsNumber(min_value=1, max_value=2, min_inclusive=False)
     assert repr(matcher) == "To be a number greater than 1 and lower or equal than 2"
-    matcher = IsNumber(min=1, max=2, max_inclusive=False)
+    matcher = IsNumber(min_value=1, max_value=2, max_inclusive=False)
     assert repr(matcher) == "To be a number greater or equal than 1 and lower than 2"
-    matcher = IsNumber(float, min=1, max=2)
+    matcher = IsNumber(float, min_value=1, max_value=2)
     assert repr(matcher) == "To be a number of 'float' instance and between 1 and 2"
 
 
@@ -53,47 +53,47 @@ def test_matches_type():
 
 
 def test_matches_limit_inclusive():
-    matcher = IsNumber(min=1, max=2)
+    matcher = IsNumber(min_value=1, max_value=2)
     assert matcher == 1
     assert matcher == 1.5
     assert matcher == 2
-    assert not matcher == 0
-    assert not matcher == 3
-    assert not matcher == "string"
+    assert matcher != 0
+    assert matcher != 3
+    assert matcher != "string"
 
 
 def test_matches_limit_exclusive():
-    matcher = IsNumber(min=1, max=2, inclusive=False)
+    matcher = IsNumber(min_value=1, max_value=2, inclusive=False)
     assert matcher == 1.5
-    assert not matcher == 1
-    assert not matcher == 2
-    assert not matcher == 0
-    assert not matcher == 3
-    assert not matcher == "string"
+    assert matcher != 1
+    assert matcher != 2
+    assert matcher != 0
+    assert matcher != 3
+    assert matcher != "string"
 
 
 def test_matches_min_exclusive():
-    matcher = IsNumber(min=1, max=2, min_inclusive=False)
+    matcher = IsNumber(min_value=1, max_value=2, min_inclusive=False)
     assert matcher == 1.5
     assert matcher == 2
-    assert not matcher == 1
-    assert not matcher == 0
-    assert not matcher == 3
-    assert not matcher == "string"
+    assert matcher != 1
+    assert matcher != 0
+    assert matcher != 3
+    assert matcher != "string"
 
 
 def test_matches_max_exclusive():
-    matcher = IsNumber(min=1, max=2, max_inclusive=False)
+    matcher = IsNumber(min_value=1, max_value=2, max_inclusive=False)
     assert matcher == 1
     assert matcher == 1.5
-    assert not matcher == 2
-    assert not matcher == 0
-    assert not matcher == 3
-    assert not matcher == "string"
+    assert matcher != 2
+    assert matcher != 0
+    assert matcher != 3
+    assert matcher != "string"
 
 
 def test_matches_without_max():
-    matcher = IsNumber(min=1)
+    matcher = IsNumber(min_value=1)
     assert matcher == 1
     assert matcher == 1.5
     assert matcher == 3

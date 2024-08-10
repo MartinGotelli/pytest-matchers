@@ -23,9 +23,9 @@ def test_concatenated_repr():
 def test_matches_list():
     matcher = Contains(20)
     assert matcher == [10, 20, 30]
-    assert not matcher == [10, 21]
-    assert not matcher == "string"
-    assert not matcher == 20
+    assert matcher != [10, 21]
+    assert matcher != "string"
+    assert matcher != 20
 
 
 def test_matches_string():
@@ -34,6 +34,6 @@ def test_matches_string():
     assert matcher == "abc"
     assert matcher == "dabc"
     assert matcher == ["x", "ab", "y"]
-    assert not matcher == "ac"
-    assert not matcher == ["abc"]
-    assert not matcher == 20
+    assert matcher != "ac"
+    assert matcher != ["abc"]
+    assert matcher != 20

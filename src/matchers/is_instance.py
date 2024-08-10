@@ -1,6 +1,6 @@
 from typing import Any
 
-from src.matchers.base import Matcher
+from src.matchers import Matcher
 
 
 class IsInstance(Matcher):

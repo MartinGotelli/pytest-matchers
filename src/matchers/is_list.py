@@ -1,13 +1,13 @@
 from typing import Any, Callable, Type
 
 from src.matchers import IsInstance, Matcher
-from utils.matcher_utils import (
+from src.utils.matcher_utils import (
     is_instance_matcher,
     length_matcher,
     matches_or_none,
     partial_matches_or_none,
 )
-from utils.repr_utils import concat_reprs
+from src.utils.repr_utils import concat_reprs
 
 
 class IsList(Matcher):
@@ -20,12 +20,10 @@ class IsList(Matcher):
         max_length: int = None,
     ):
         self._is_instance_matcher = is_instance_matcher(match_type)
-        self._length_matcher = length_matcher(length, max_length, min_length)
+        self._length_matcher = length_matcher(length, min_length, max_length)
 
     def matches(self, value: Any) -> bool:
-        return self._matches_type(value) and matches_or_none(
-            self._length_matcher, value
-        )
+        return self._matches_type(value) and matches_or_none(self._length_matcher, value)
 
     def _matches_type(self, value: Any) -> bool:
         return IsInstance(list) == value and all(map(self._type_matcher(), value))

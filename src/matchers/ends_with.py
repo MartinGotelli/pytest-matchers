@@ -14,7 +14,8 @@ class EndsWith(Matcher):
             except TypeError:
                 return False
         if isinstance(value, list):
-            return value[-len(self._suffix) :] == self._suffix
+            suffix_len = len(self._suffix)
+            return value[-suffix_len:] == self._suffix
 
         return False
 

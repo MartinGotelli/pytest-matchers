@@ -1,7 +1,7 @@
 from typing import Any
 
 from src.matchers import Matcher
-from utils.matcher_utils import as_matcher
+from src.utils.matcher_utils import as_matcher
 
 
 class Not(Matcher):

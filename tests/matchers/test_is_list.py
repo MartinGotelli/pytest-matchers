@@ -1,3 +1,4 @@
+# pylint: disable=use-implicit-booleaness-not-comparison
 import pytest
 
 from src.matchers import IsList
@@ -24,20 +25,11 @@ def test_repr():
     matcher = IsList(int, length=2)
     assert repr(matcher) == "To be a list of 'int' instance and with length of 2"
     matcher = IsList(int, min_length=2)
-    assert (
-        repr(matcher)
-        == "To be a list of 'int' instance and with length greater or equal than 2"
-    )
+    assert repr(matcher) == "To be a list of 'int' instance and with length greater or equal than 2"
     matcher = IsList(int, max_length=2)
-    assert (
-        repr(matcher)
-        == "To be a list of 'int' instance and with length lower or equal than 2"
-    )
+    assert repr(matcher) == "To be a list of 'int' instance and with length lower or equal than 2"
     matcher = IsList(int, min_length=2, max_length=4)
-    assert (
-        repr(matcher)
-        == "To be a list of 'int' instance and with length between 2 and 4"
-    )
+    assert repr(matcher) == "To be a list of 'int' instance and with length between 2 and 4"
     matcher = IsList(None, length=2)
     assert repr(matcher) == "To be a list with length of 2"
 

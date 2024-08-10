@@ -13,3 +13,4 @@ from .is_string import IsString
 from .or_matcher import Or
 from .not_matcher import Not
 from .is_number import IsNumber
+from .anything import Anything
