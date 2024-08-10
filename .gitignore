@@ -170,3 +170,6 @@ cython_debug/
 
 # Poetry
 poetry.lock
+
+# .env
+.env
