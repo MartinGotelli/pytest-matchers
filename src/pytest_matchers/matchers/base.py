@@ -8,17 +8,17 @@ class Matcher(ABC):
         return self.matches(other)
 
     def __and__(self, other: "Matcher") -> "Matcher":
-        from src.matchers import And
+        from pytest_matchers.matchers import And
 
         return And(self, other)
 
     def __or__(self, other: "Matcher") -> "Matcher":
-        from src.matchers import Or
+        from pytest_matchers.matchers import Or
 
         return Or(self, other)
 
     def __invert__(self) -> "Matcher":
-        from src.matchers import Not
+        from pytest_matchers.matchers import Not
 
         return Not(self)
 

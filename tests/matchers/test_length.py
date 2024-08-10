@@ -1,6 +1,6 @@
 import pytest
 
-from src.matchers import Length
+from pytest_matchers.matchers import Length
 
 
 def test_create():

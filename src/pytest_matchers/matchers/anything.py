@@ -1,6 +1,6 @@
 from typing import Any
 
-from src.matchers import Matcher
+from pytest_matchers.matchers import Matcher
 
 
 class Anything(Matcher):

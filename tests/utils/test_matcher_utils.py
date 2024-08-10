@@ -1,5 +1,14 @@
-from src.matchers import Anything, Between, Contains, EndsWith, Eq, IsInstance, Length, StartsWith
-from src.utils.matcher_utils import (
+from pytest_matchers.matchers import (
+    Anything,
+    Between,
+    Contains,
+    EndsWith,
+    Eq,
+    IsInstance,
+    Length,
+    StartsWith,
+)
+from pytest_matchers.utils.matcher_utils import (
     as_matcher,
     between_matcher,
     contains_matcher,

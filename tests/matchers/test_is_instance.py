@@ -1,4 +1,4 @@
-from src.matchers import IsInstance
+from pytest_matchers.matchers import IsInstance
 
 
 def test_create():

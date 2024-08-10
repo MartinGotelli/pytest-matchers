@@ -1,7 +1,7 @@
 from typing import Any
 
-from src.matchers import Matcher
-from src.utils.repr_utils import concat_reprs
+from pytest_matchers.matchers import Matcher
+from pytest_matchers.utils.repr_utils import concat_reprs
 
 
 class Or(Matcher):

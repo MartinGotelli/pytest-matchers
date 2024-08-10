@@ -1,10 +1,10 @@
 from typing import Any, Callable
 
-from src.matchers import Between
-from src.matchers import Contains
-from src.matchers import EndsWith
-from src.matchers import Eq, IsInstance, Length, Matcher
-from src.matchers import StartsWith
+from pytest_matchers.matchers import Between
+from pytest_matchers.matchers import Contains
+from pytest_matchers.matchers import EndsWith
+from pytest_matchers.matchers import Eq, IsInstance, Length, Matcher
+from pytest_matchers.matchers import StartsWith
 
 
 def as_matcher(value: Matcher | Any) -> Matcher:

@@ -1,6 +1,6 @@
 import pytest
 
-from src.matchers import Between
+from pytest_matchers.matchers import Between
 
 
 def test_create():

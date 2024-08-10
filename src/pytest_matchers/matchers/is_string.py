@@ -1,14 +1,14 @@
 from typing import Any
 
-from src.matchers import IsInstance, Matcher
-from src.utils.matcher_utils import (
+from pytest_matchers.matchers import IsInstance, Matcher
+from pytest_matchers.utils.matcher_utils import (
     contains_matcher,
     ends_with_matcher,
     length_matcher,
     matches_or_none,
     starts_with_matcher,
 )
-from src.utils.repr_utils import concat_reprs
+from pytest_matchers.utils.repr_utils import concat_reprs
 
 
 class IsString(Matcher):

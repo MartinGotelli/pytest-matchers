@@ -1,4 +1,4 @@
-from src.matchers import Eq
+from pytest_matchers.matchers import Eq
 
 
 def test_create():

@@ -1,6 +1,6 @@
 import pytest
 
-from src.matchers import IsNumber
+from pytest_matchers.matchers import IsNumber
 
 
 def test_create():

@@ -1,4 +1,4 @@
-from src.matchers import IsInstance, Or, Eq
+from pytest_matchers.matchers import IsInstance, Or, Eq
 
 
 def test_create():

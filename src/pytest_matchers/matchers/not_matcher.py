@@ -1,7 +1,7 @@
 from typing import Any
 
-from src.matchers import Matcher
-from src.utils.matcher_utils import as_matcher
+from pytest_matchers.matchers import Matcher
+from pytest_matchers.utils.matcher_utils import as_matcher
 
 
 class Not(Matcher):

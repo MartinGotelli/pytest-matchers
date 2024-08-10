@@ -1,4 +1,4 @@
-from src.matchers import Contains
+from pytest_matchers.matchers import Contains
 
 
 def test_create():

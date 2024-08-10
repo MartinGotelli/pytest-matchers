@@ -1,13 +1,13 @@
 from typing import Any, Callable, Type
 
-from src.matchers import IsInstance, Matcher
-from src.utils.matcher_utils import (
+from pytest_matchers.matchers import IsInstance, Matcher
+from pytest_matchers.utils.matcher_utils import (
     is_instance_matcher,
     length_matcher,
     matches_or_none,
     partial_matches_or_none,
 )
-from src.utils.repr_utils import concat_reprs
+from pytest_matchers.utils.repr_utils import concat_reprs
 
 
 class IsList(Matcher):

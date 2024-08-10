@@ -1,4 +1,4 @@
-from src.matchers import EndsWith
+from pytest_matchers.matchers import EndsWith
 
 
 def test_create():

@@ -1,5 +1,5 @@
-from src.matchers import Eq, IsInstance
-from src.utils.repr_utils import concat_matcher_repr, concat_reprs
+from pytest_matchers.matchers import Eq, IsInstance
+from pytest_matchers.utils.repr_utils import concat_matcher_repr, concat_reprs
 
 
 def test_concat_matcher_repr():

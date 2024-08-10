@@ -1,7 +1,7 @@
 # pylint: disable=use-implicit-booleaness-not-comparison
 import pytest
 
-from src.matchers import IsList
+from pytest_matchers.matchers import IsList
 
 
 def test_create():

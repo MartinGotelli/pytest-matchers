@@ -1,8 +1,12 @@
 from typing import Any, Type
 
-from src.matchers import Matcher
-from src.utils.matcher_utils import between_matcher, is_instance_matcher, matches_or_none
-from src.utils.repr_utils import concat_reprs
+from pytest_matchers.matchers import Matcher
+from pytest_matchers.utils.matcher_utils import (
+    between_matcher,
+    is_instance_matcher,
+    matches_or_none,
+)
+from pytest_matchers.utils.repr_utils import concat_reprs
 
 
 class IsNumber(Matcher):

@@ -1,6 +1,6 @@
 import pytest
 
-from src.matchers import IsString
+from pytest_matchers.matchers import IsString
 
 
 def test_create():

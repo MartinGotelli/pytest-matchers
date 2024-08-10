@@ -1,4 +1,4 @@
-from src.matchers import Matcher
+from pytest_matchers.matchers import Matcher
 
 
 def _repr(extra_repr: str | Matcher | None) -> str:
