@@ -47,16 +47,16 @@ coverage_html:
 	open htmlcov/index.html
 
 lint:
-	poetry run pylint $(FOLDERS)
+	pylint $(FOLDERS)
 
 vulture:
-	poetry run vulture
+	vulture
 
 spell:
-	poetry run codespell
+	codespell
 
 tests:
-	poetry run pytest tests
+	pytest tests
 
 requirements: validate_env
 	@make requirements_dev
