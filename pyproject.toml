@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "pytest-matchers"
+version = "0.0.1"
+description = "Matchers for pytest"
+authors = ["MartinGotelli <martingotelliferenaz@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.2"
+black = "^24.8.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
