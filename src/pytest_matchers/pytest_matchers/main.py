@@ -12,6 +12,7 @@ from pytest_matchers.matchers import (
     Matcher,
     Or,
 )
+from pytest_matchers.matchers.same_value import SameValue
 
 
 def is_instance(match_type: Type) -> IsInstance:
@@ -71,3 +72,7 @@ def is_datetime_string(
     max_value: Any = None,
 ) -> DatetimeString:
     return DatetimeString(expected_format, min_value=min_value, max_value=max_value)
+
+
+def same_value():
+    return SameValue()

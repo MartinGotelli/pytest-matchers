@@ -4,13 +4,14 @@ from unittest.mock import MagicMock
 from pytest_matchers import (
     between,
     has_attribute,
+    is_datetime,
+    is_datetime_string,
     is_instance,
     is_list,
     is_number,
     is_string,
     one_of,
-    is_datetime,
-    is_datetime_string,
+    same_value,
 )
 
 
@@ -129,3 +130,12 @@ def test_is_datetime_string():
         min_value=datetime(2021, 1, 2),
         max_value=datetime(2021, 1, 2),
     )
+
+
+def test_same_value():
+    assert 3 == same_value()
+    assert 4 == same_value()
+    matcher = same_value()
+    assert matcher == 3
+    assert matcher != 4
+    assert matcher == 3
