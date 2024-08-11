@@ -20,7 +20,7 @@ poetry add pytest-matchers [--group dev]
 ```
 
 ## Usage
-Examples on [tests/examples](https://github.com/MartinGotelli/pytest-matchers/tree/main/tests/examples)
+Examples on [tests/examples](https://github.com/MartinGotelli/pytest-matchers/tree/main/src/pytest_matchers/tests/examples)
 ```python
 from random import random
 from pytest_matchers import is_number
