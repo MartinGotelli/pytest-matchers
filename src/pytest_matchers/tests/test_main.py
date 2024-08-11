@@ -1,6 +1,7 @@
+from datetime import datetime
 from unittest.mock import MagicMock
 
-from pytest_matchers.main import (
+from pytest_matchers import (
     between,
     has_attribute,
     is_instance,
@@ -8,6 +9,8 @@ from pytest_matchers.main import (
     is_number,
     is_string,
     one_of,
+    is_datetime,
+    is_datetime_string,
 )
 
 
@@ -87,3 +90,42 @@ def test_between():
     assert 1 != between(1, 3, min_inclusive=False)
     assert 3 == between(1, 3, min_inclusive=False)
     assert "c" == between("a", "d")
+
+
+def test_is_datetime():
+    assert datetime(2021, 1, 1) == is_datetime()
+    assert datetime(2021, 1, 1) == is_datetime(year=2021, month=1, day=1)
+    assert datetime(2021, 1, 1) != is_datetime(year=2021, month=1, day=2)
+    assert datetime(2021, 1, 2) == is_datetime(min_value=datetime(2021, 1, 1))
+    assert datetime(2021, 1, 1) == is_datetime(max_value=datetime(2021, 1, 2))
+    assert datetime(2021, 1, 1, 20, 15, 15) == is_datetime(
+        min_value=datetime(2021, 1, 1),
+        max_value=datetime(2021, 1, 2),
+    )
+    assert datetime(2021, 1, 1, 20, 14, 15) == is_datetime(
+        year=2021,
+        month=1,
+        day=1,
+        hour=20,
+        minute=14,
+        second=15,
+    )
+
+
+def test_is_datetime_string():
+    assert "2021-01-01" != is_datetime_string("erroneous_format")
+    assert "2021-01-01" == is_datetime_string("%Y-%m-%d")
+    assert "2021-01-01" == is_datetime_string("%Y-%m-%d")
+    assert "2021-01-01" != is_datetime_string("%Y-%m-%d %H:%M:%S")
+    assert "2021-01-01" == is_datetime_string("%Y-%m-%d", min_value=datetime(2021, 1, 1))
+    assert "2021-01-01" == is_datetime_string("%Y-%m-%d", max_value=datetime(2021, 1, 1))
+    assert "2021-01-01" == is_datetime_string(
+        "%Y-%m-%d",
+        min_value=datetime(2021, 1, 1),
+        max_value=datetime(2021, 1, 2),
+    )
+    assert "2021-01-01" != is_datetime_string(
+        "%Y-%m-%d",
+        min_value=datetime(2021, 1, 2),
+        max_value=datetime(2021, 1, 2),
+    )

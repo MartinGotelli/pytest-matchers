@@ -14,4 +14,6 @@ from .or_matcher import Or
 from .not_matcher import Not
 from .is_number import IsNumber
 from .anything import Anything
+from .datetime import Datetime
+from .datetime_string import DatetimeString
 from .has_attribute import HasAttribute

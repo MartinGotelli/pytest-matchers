@@ -69,3 +69,5 @@ Actual   :0.9048172867693559
 - `between`
 - `one_of`
 - `has_attribute`
+- `is_datetime`
+- `is_datetime_string`

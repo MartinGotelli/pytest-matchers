@@ -2,8 +2,8 @@ from datetime import datetime
 from random import random
 from unittest.mock import MagicMock
 
-from pytest_matchers import is_instance, is_list, is_number
-from pytest_matchers.main import between, has_attribute
+from pytest_matchers import is_datetime, is_datetime_string, is_instance, is_list, is_number
+from pytest_matchers import between, has_attribute
 
 
 def test_random_number():
@@ -22,6 +22,7 @@ def test_dict_comparison():
         "int": is_instance(int),
         "list": is_list(int, length=3),
     }
+    assert value != {"string": is_instance(str), "int": is_instance(int)}
 
 
 def test_mock_log_exception():
@@ -41,11 +42,16 @@ def test_mock_log_exception():
 
 def test_datetime_comparison():
     def _datetime_function():
-        return {"data": "some data", "created_at": datetime.now()}
+        return {
+            "data": "some data",
+            "created_at": datetime.now(),
+            "created_at_string": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        }
 
     expected_value = {
         "data": "some data",
-        "created_at": is_instance(datetime),
+        "created_at": is_datetime(min_value=datetime.now()),
+        "created_at_string": is_datetime_string("%Y-%m-%d %H:%M:%S", min_value=datetime.now()),
     }
     first_data = _datetime_function()
     assert first_data == expected_value

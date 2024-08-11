@@ -2,6 +2,8 @@ from typing import Any, Type
 
 from pytest_matchers.matchers import (
     Between,
+    Datetime,
+    DatetimeString,
     HasAttribute,
     IsInstance,
     IsList,
@@ -47,3 +49,25 @@ def between(
     max_inclusive: bool = None,
 ) -> Between:
     return Between(min_value, max_value, inclusive, min_inclusive, max_inclusive)
+
+
+def is_datetime(
+    min_value: Any = None,
+    max_value: Any = None,
+    year: int = None,
+    month: int = None,
+    day: int = None,
+    hour: int = None,
+    minute: int = None,
+    second: int = None,
+) -> Datetime:
+    return Datetime(min_value, max_value, year, month, day, hour, minute, second)
+
+
+def is_datetime_string(
+    expected_format: str,
+    *,
+    min_value: Any = None,
+    max_value: Any = None,
+) -> DatetimeString:
+    return DatetimeString(expected_format, min_value=min_value, max_value=max_value)
