@@ -1,5 +1,7 @@
 from .main import (
+    anything,
     between,
+    different_value,
     has_attribute,
     is_datetime,
     is_datetime_string,

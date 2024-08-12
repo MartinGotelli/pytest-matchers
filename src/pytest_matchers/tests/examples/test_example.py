@@ -4,6 +4,7 @@ from unittest.mock import MagicMock
 
 from pytest_matchers import (
     between,
+    different_value,
     has_attribute,
     is_datetime,
     is_datetime_string,
@@ -68,25 +69,25 @@ def test_datetime_comparison():
     assert first_data != second_data
 
 
-def test_same_value_comparison():
+def test_same_and_different_value_comparison():
     dynamic_value = None
 
-    def _function():
+    def _function(previous_value: float = 0):
         nonlocal dynamic_value
         if dynamic_value is None:
             dynamic_value = random()
         return {
             "static": "static",
             "dynamic_repeated": dynamic_value,
-            "dynamic_different": random(),
+            "dynamic_different": previous_value + random(),
         }
 
     expected_value = {
         "static": "static",
         "dynamic_repeated": same_value() & is_number(min_value=0, max_value=1),
-        "dynamic_different": is_number(),
+        "dynamic_different": different_value() & is_number(),
     }
     first_data = _function()
     assert first_data == expected_value
-    second_data = _function()
+    second_data = _function(first_data["dynamic_different"])
     assert second_data == expected_value

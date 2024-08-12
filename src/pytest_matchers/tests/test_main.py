@@ -2,7 +2,9 @@ from datetime import datetime
 from unittest.mock import MagicMock
 
 from pytest_matchers import (
+    anything,
     between,
+    different_value,
     has_attribute,
     is_datetime,
     is_datetime_string,
@@ -13,6 +15,11 @@ from pytest_matchers import (
     one_of,
     same_value,
 )
+
+
+def test_anything():
+    assert 3 == anything()
+    assert "string" == anything()
 
 
 def test_is_instance():
@@ -139,3 +146,12 @@ def test_same_value():
     assert matcher == 3
     assert matcher != 4
     assert matcher == 3
+
+
+def test_different_value():
+    assert 3 == different_value()
+    assert 4 == different_value()
+    matcher = different_value()
+    assert matcher == 3
+    assert matcher != 3
+    assert matcher == 4

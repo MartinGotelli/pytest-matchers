@@ -17,3 +17,5 @@ from .anything import Anything
 from .datetime import Datetime
 from .datetime_string import DatetimeString
 from .has_attribute import HasAttribute
+from .same_value import SameValue
+from .different_value import DifferentValue

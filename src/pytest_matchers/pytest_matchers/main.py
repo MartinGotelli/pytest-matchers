@@ -1,6 +1,7 @@
 from typing import Any, Type
 
 from pytest_matchers.matchers import (
+    Anything,
     Between,
     Datetime,
     DatetimeString,
@@ -11,8 +12,13 @@ from pytest_matchers.matchers import (
     IsString,
     Matcher,
     Or,
+    SameValue,
+    DifferentValue,
 )
-from pytest_matchers.matchers.same_value import SameValue
+
+
+def anything() -> Anything:
+    return Anything()
 
 
 def is_instance(match_type: Type) -> IsInstance:
@@ -74,5 +80,9 @@ def is_datetime_string(
     return DatetimeString(expected_format, min_value=min_value, max_value=max_value)
 
 
-def same_value():
+def same_value() -> SameValue:
     return SameValue()
+
+
+def different_value() -> DifferentValue:
+    return DifferentValue()
