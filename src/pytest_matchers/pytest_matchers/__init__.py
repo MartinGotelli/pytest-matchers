@@ -1,5 +1,7 @@
 from .main import (
+    anything,
     between,
+    different_value,
     has_attribute,
     is_datetime,
     is_datetime_string,
@@ -8,4 +10,5 @@ from .main import (
     is_number,
     is_string,
     one_of,
+    same_value,
 )

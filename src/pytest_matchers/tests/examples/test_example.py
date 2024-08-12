@@ -2,8 +2,17 @@ from datetime import datetime
 from random import random
 from unittest.mock import MagicMock
 
-from pytest_matchers import is_datetime, is_datetime_string, is_instance, is_list, is_number
-from pytest_matchers import between, has_attribute
+from pytest_matchers import (
+    between,
+    different_value,
+    has_attribute,
+    is_datetime,
+    is_datetime_string,
+    is_instance,
+    is_list,
+    is_number,
+    same_value,
+)
 
 
 def test_random_number():
@@ -58,3 +67,27 @@ def test_datetime_comparison():
     second_data = _datetime_function()
     assert second_data == expected_value
     assert first_data != second_data
+
+
+def test_same_and_different_value_comparison():
+    dynamic_value = None
+
+    def _function(previous_value: float = 0):
+        nonlocal dynamic_value
+        if dynamic_value is None:
+            dynamic_value = random()
+        return {
+            "static": "static",
+            "dynamic_repeated": dynamic_value,
+            "dynamic_different": previous_value + random(),
+        }
+
+    expected_value = {
+        "static": "static",
+        "dynamic_repeated": same_value() & is_number(min_value=0, max_value=1),
+        "dynamic_different": different_value() & is_number(),
+    }
+    first_data = _function()
+    assert first_data == expected_value
+    second_data = _function(first_data["dynamic_different"])
+    assert second_data == expected_value
