@@ -20,7 +20,11 @@ def concat_reprs(
         [_repr(extra_repr) for extra_repr in extra_reprs if extra_repr]
     )
     if not base_repr and extra_repr:
-        return extra_repr[0].upper() + extra_repr[1:]
+        return capitalized(extra_repr)
     if extra_repr:
         return f"{base_repr} {extra_repr}"
     return base_repr
+
+
+def capitalized(string: str):
+    return string[0].upper() + string[1:]

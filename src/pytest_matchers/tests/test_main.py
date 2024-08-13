@@ -4,8 +4,11 @@ from unittest.mock import MagicMock
 from pytest_matchers import (
     anything,
     between,
+    case,
     different_value,
     has_attribute,
+    if_false,
+    if_true,
     is_datetime,
     is_datetime_string,
     is_instance,
@@ -155,3 +158,33 @@ def test_different_value():
     assert matcher == 3
     assert matcher != 3
     assert matcher == 4
+
+
+def test_if_true():
+    assert 3 == if_true(True, is_number(), is_string())
+    assert 4 != if_true(False, is_number(), is_string())
+    assert 3 == if_true(lambda x: x == 3, 3)
+    assert 4 != if_true(lambda x: x == 3, 4, 3)
+    assert 4 == if_true(lambda x: x == 3, 4)
+    assert 3 != if_true(3, 4)
+    assert 4 != if_true(3, 4, 5)
+    assert 20 == if_true(is_number(int), is_number(min_value=10), is_number(max_value=10))
+
+
+def test_if_false():
+    assert 3 == if_false(False, is_number(), is_string())
+    assert 4 != if_false(True, is_number(), is_string())
+    assert 3 == if_false(lambda x: x == 3, 3)
+    assert 4 == if_false(lambda x: x == 3, 4, 3)
+    assert 4 == if_false(lambda x: x == 3, 4)
+    assert 3 == if_false(3, 4)
+    assert 4 == if_false(3, 4, 5)
+    assert 20 != if_false(is_number(int), is_number(min_value=10), is_number(max_value=10))
+
+
+def test_case():
+    assert 4 == case(3, {3: 4, 4: "string"})
+    assert "3" == case(3, {3: is_string()})
+    assert 4 != case(3, {3: is_string()}, 4)
+    assert "string" == case(4, {3: is_number()}, is_string())
+    assert 4 != case(4, {3: 3})

@@ -1,11 +1,13 @@
-from typing import Any, Type
+from typing import Any, Callable, Type
 
 from pytest_matchers.matchers import (
     Anything,
     Between,
+    Case,
     Datetime,
     DatetimeString,
     HasAttribute,
+    If,
     IsInstance,
     IsList,
     IsNumber,
@@ -86,3 +88,27 @@ def same_value() -> SameValue:
 
 def different_value() -> DifferentValue:
     return DifferentValue()
+
+
+def if_true(
+    condition: Callable | bool | Any,
+    then: Matcher | Any = None,
+    or_else: Matcher | Any = None,
+) -> If:
+    return If(condition, then, or_else)
+
+
+def if_false(
+    condition: Callable | bool | Any,
+    then: Matcher | Any = None,
+    or_else: Matcher | Any = None,
+) -> If:
+    return if_true(condition, or_else, then)  # pylint: disable=arguments-out-of-order
+
+
+def case(
+    case_value: Any,
+    expectations: dict[Any, Matcher | Any],
+    default_expectation: Matcher | Any | None = None,
+) -> Case:
+    return Case(case_value, expectations, default_expectation)
