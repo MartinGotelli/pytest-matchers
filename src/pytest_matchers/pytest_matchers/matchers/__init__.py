@@ -21,3 +21,4 @@ from .same_value import SameValue
 from .different_value import DifferentValue
 from .if_matcher import If
 from .case import Case
+from .dict import Dict

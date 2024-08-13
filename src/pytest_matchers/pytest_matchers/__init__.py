@@ -8,6 +8,7 @@ from .main import (
     if_true,
     is_datetime,
     is_datetime_string,
+    is_dict,
     is_instance,
     is_list,
     is_number,
