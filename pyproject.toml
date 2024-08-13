@@ -27,7 +27,7 @@ command_line = "-m pytest src/pytest_matchers/tests"
 
 [tool.coverage.report]
 show_missing = true
-exclude_also = ["@abstractmethod"]
+exclude_also = ["@abstractmethod", "If"]
 
 [tool.coverage.xml]
 output = "coverage.xml"

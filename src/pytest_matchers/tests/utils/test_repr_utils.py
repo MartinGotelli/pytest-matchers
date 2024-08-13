@@ -1,5 +1,5 @@
 from pytest_matchers.matchers import Eq, IsInstance
-from pytest_matchers.utils.repr_utils import concat_matcher_repr, concat_reprs
+from pytest_matchers.utils.repr_utils import capitalized, concat_matcher_repr, concat_reprs
 
 
 def test_concat_matcher_repr():
@@ -21,3 +21,9 @@ def test_concat_reprs():
         == "I expect of 'str' instance and to be 2 and be happy"
     )
     assert concat_reprs("I expect", Eq(3), Eq(4), separator="or") == "I expect to be 3 or to be 4"
+
+
+def test_capitalized():
+    assert capitalized("i expect") == "I expect"
+    assert capitalized("I expect") == "I expect"
+    assert capitalized("I KNOW") == "I KNOW"

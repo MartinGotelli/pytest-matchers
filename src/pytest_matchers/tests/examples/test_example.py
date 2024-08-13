@@ -4,13 +4,17 @@ from unittest.mock import MagicMock
 
 from pytest_matchers import (
     between,
+    case,
     different_value,
     has_attribute,
+    if_false,
+    if_true,
     is_datetime,
     is_datetime_string,
     is_instance,
     is_list,
     is_number,
+    is_string,
     same_value,
 )
 
@@ -91,3 +95,36 @@ def test_same_and_different_value_comparison():
     assert first_data == expected_value
     second_data = _function(first_data["dynamic_different"])
     assert second_data == expected_value
+
+
+def test_conditional_matchers():
+    assert random() == if_true(
+        lambda value: value > 0.5,
+        is_number(min_value=0.5, inclusive=False),
+        is_number(max_value=0.5),
+    )
+    assert random() == if_false(
+        lambda value: value > 0.5,
+        is_number(max_value=0.5),
+        is_number(min_value=0.5, inclusive=False),
+    )
+    random_value = random()
+    random_string = "low"
+    if random_value > 0.5:  # pragma: no cover
+        random_string = "medium"
+    if random_value > 0.8:  # pragma: no cover
+        random_string = "high"
+    assert random_value == case(
+        random_string,
+        {
+            "low": is_number(max_value=0.5),
+            "medium": is_number(min_value=0.5, max_value=0.8, min_inclusive=False),
+            "high": is_number(min_value=0.8, inclusive=False),
+        },
+    )
+    matcher = if_true(is_string(), is_datetime_string("%Y-%m-%d"), is_datetime())
+    assert "2021-01-01" == matcher
+    assert datetime(2021, 1, 1) == matcher
+    assert 3 != matcher
+    assert random() != matcher
+    assert "10/11/2029" != matcher

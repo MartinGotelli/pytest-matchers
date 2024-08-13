@@ -71,3 +71,8 @@ Actual   :0.9048172867693559
 - `has_attribute`
 - `is_datetime`
 - `is_datetime_string`
+- `same_value`
+- `different_value`
+- `if_true`
+- `if_false`
+- `case`

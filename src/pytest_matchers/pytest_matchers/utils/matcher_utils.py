@@ -18,6 +18,12 @@ def as_matcher(value: Matcher | Any) -> Matcher:
     return Eq(value)
 
 
+def as_matcher_or_none(value: Matcher | Any | None) -> Matcher | None:
+    if value is None:
+        return None
+    return as_matcher(value)
+
+
 def matches_or_none(matcher: Matcher | None, value: Any) -> bool:
     return matcher is None or matcher == value
 
