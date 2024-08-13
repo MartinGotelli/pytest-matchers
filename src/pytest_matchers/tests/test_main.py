@@ -11,6 +11,7 @@ from pytest_matchers import (
     if_true,
     is_datetime,
     is_datetime_string,
+    is_dict,
     is_instance,
     is_list,
     is_number,
@@ -188,3 +189,18 @@ def test_case():
     assert 4 != case(3, {3: is_string()}, 4)
     assert "string" == case(4, {3: is_number()}, is_string())
     assert 4 != case(4, {3: 3})
+
+
+def test_is_dict():
+    assert {"key": 3} == is_dict()
+    assert {"key": 3} == is_dict({"key": 3})
+    assert {"key": 3} != is_dict({"key": 4})
+    assert {"key": 3} != is_dict({"other": 3})
+    assert {"key": 3} == is_dict({"key": 3}, exclude=["other"])
+    assert {"key": 3, "other": 10} != is_dict({"key": 3}, exclude=["other"])
+    assert {"key": 3} != is_dict({"key": 3, "other": 4})
+    assert {"key": 3, "x": 5} == is_dict({"key": 3})
+    assert {"key": 3, "other": "string"} == is_dict({"key": 3, "other": is_string()})
+    assert {1: "one", 8.9: [1, 2, 3], "cool": 30.5} == is_dict(
+        {1: "one", 8.9: [1, 2, 3], "cool": is_number()}
+    )

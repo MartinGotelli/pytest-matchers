@@ -6,6 +6,8 @@ from pytest_matchers.matchers import (
     Case,
     Datetime,
     DatetimeString,
+    Dict,
+    DifferentValue,
     HasAttribute,
     If,
     IsInstance,
@@ -15,7 +17,6 @@ from pytest_matchers.matchers import (
     Matcher,
     Or,
     SameValue,
-    DifferentValue,
 )
 
 
@@ -112,3 +113,7 @@ def case(
     default_expectation: Matcher | Any | None = None,
 ) -> Case:
     return Case(case_value, expectations, default_expectation)
+
+
+def is_dict(matching: dict = None, exclude: list[Any] = None) -> Dict:
+    return Dict(matching, exclude)

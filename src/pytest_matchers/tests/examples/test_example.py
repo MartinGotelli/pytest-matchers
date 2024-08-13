@@ -3,6 +3,7 @@ from random import random
 from unittest.mock import MagicMock
 
 from pytest_matchers import (
+    anything,
     between,
     case,
     different_value,
@@ -11,6 +12,7 @@ from pytest_matchers import (
     if_true,
     is_datetime,
     is_datetime_string,
+    is_dict,
     is_instance,
     is_list,
     is_number,
@@ -128,3 +130,42 @@ def test_conditional_matchers():
     assert 3 != matcher
     assert random() != matcher
     assert "10/11/2029" != matcher
+
+
+def test_compare_dictionaries():
+    test_dict = {"a": 1, "b": [2, "string"], "c": True, "d": "true"}
+
+    assert test_dict == {
+        "a": 1,
+        "b": is_list(length=2),
+        "c": True,
+        "d": anything(),
+    }
+    assert test_dict != {
+        "a": 1,
+        "b": is_list(length=2),
+        "c": True,
+    }
+    assert test_dict == is_dict(
+        {
+            "a": 1,
+            "b": is_list(length=2),
+            "c": True,
+        }
+    )
+    assert test_dict != is_dict(
+        {
+            "a": 1,
+            "b": is_list(length=2),
+            "c": True,
+        },
+        exclude=["d"],
+    )
+    assert test_dict == is_dict(
+        {
+            "a": 1,
+            "b": is_list(length=2),
+            "c": True,
+        },
+        exclude=["e"],
+    )
