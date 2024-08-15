@@ -14,7 +14,7 @@ def test_repr():
     matcher = And(Eq(1))
     assert repr(matcher) == "To be 1"
     matcher = IsInstance(int) & Eq(1)
-    assert repr(matcher) == "Of 'int' instance and to be 1"
+    assert repr(matcher) == "To be instance of 'int' and equal to 1"
 
 
 def test_matches():

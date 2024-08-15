@@ -16,3 +16,8 @@ def test_matches():
 def test_repr():
     assert repr(Eq(1)) == "To be 1"
     assert repr(Eq("string")) == "To be 'string'"
+
+
+def test_concatenated_repr():
+    assert Eq(1).concatenated_repr() == "equal to 1"
+    assert Eq("string").concatenated_repr() == "equal to 'string'"

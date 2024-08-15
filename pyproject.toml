@@ -5,6 +5,9 @@ description = "Matchers for pytest"
 license = "MIT"
 authors = ["MartinGotelli <martingotelliferenaz@gmail.com>"]
 readme = "README.md"
+packages = [
+    { include = "pytest_matchers", from = "src/pytest_matchers" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"

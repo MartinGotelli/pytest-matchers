@@ -14,6 +14,7 @@ from pytest_matchers.matchers import (
     IsList,
     IsNumber,
     IsString,
+    JSON,
     Matcher,
     Or,
     SameValue,
@@ -115,5 +116,9 @@ def case(
     return Case(case_value, expectations, default_expectation)
 
 
-def is_dict(matching: dict = None, exclude: list[Any] = None) -> Dict:
-    return Dict(matching, exclude)
+def is_dict(matching: dict = None, *, exclude: list[Any] = None) -> Dict:
+    return Dict(matching, exclude=exclude)
+
+
+def is_json(matching: dict = None, *, exclude: list[Any] = None) -> JSON:
+    return JSON(matching, exclude=exclude)

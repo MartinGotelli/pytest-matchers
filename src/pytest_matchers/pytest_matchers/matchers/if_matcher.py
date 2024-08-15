@@ -41,7 +41,7 @@ class If(Matcher):
             return repr(self._or_else)
 
         representation = (
-            f"{self._then.concatenated_repr()} if condition returns True"
+            f"{repr(self._then)} if condition returns True"
             f" else {self._or_else.concatenated_repr()}"
         )
         return capitalized(representation)

@@ -21,11 +21,11 @@ def test_repr():
     matcher = HasAttribute("attribute_name")
     assert repr(matcher) == "To have attribute 'attribute_name'"
     matcher = HasAttribute("attribute_name", "expected_value")
-    assert repr(matcher) == "To have attribute 'attribute_name' and to be 'expected_value'"
+    assert repr(matcher) == "To have attribute 'attribute_name' and equal to 'expected_value'"
     matcher = HasAttribute("attribute_name", 42)
-    assert repr(matcher) == "To have attribute 'attribute_name' and to be 42"
+    assert repr(matcher) == "To have attribute 'attribute_name' and equal to 42"
     matcher = HasAttribute("attribute_name", is_string())
-    assert repr(matcher) == "To have attribute 'attribute_name' and to be string"
+    assert repr(matcher) == "To have attribute 'attribute_name' and to be a string"
 
 
 def test_concatenated_repr():
@@ -36,7 +36,7 @@ def test_concatenated_repr():
     matcher = HasAttribute("attribute_name", 42)
     assert matcher.concatenated_repr() == "with 'attribute_name' being 42"
     matcher = HasAttribute("attribute_name", is_string())
-    assert matcher.concatenated_repr() == "with 'attribute_name' expecting to be string"
+    assert matcher.concatenated_repr() == "with 'attribute_name' expecting to be a string"
 
 
 def test_matches():

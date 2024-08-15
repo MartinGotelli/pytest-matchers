@@ -23,7 +23,7 @@ def test_repr():
     matcher = Case(4, {3: 4}, 5)
     assert repr(matcher) == "To be 5 because case value is 4"
     matcher = Case(4, {3: 3}, is_string())
-    assert repr(matcher) == "To be string because case value is 4"
+    assert repr(matcher) == "To be a string because case value is 4"
     matcher = Case(4, {3: 3})
     assert (
         repr(matcher) == "To never match because case value 4 is not expected "

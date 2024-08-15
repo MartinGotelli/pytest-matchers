@@ -10,6 +10,7 @@ from .main import (
     is_datetime_string,
     is_dict,
     is_instance,
+    is_json,
     is_list,
     is_number,
     is_string,

@@ -38,7 +38,7 @@ class IsString(Matcher):
 
     def __repr__(self) -> str:
         return concat_reprs(
-            "To be string",
+            "To be a string",
             self._length_matcher,
             self._contains_matcher,
             self._starts_with_matcher,
