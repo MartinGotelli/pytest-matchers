@@ -12,13 +12,13 @@ def test_create():
 
 def test_repr():
     matcher = Not(Eq(1))
-    assert repr(matcher) == "Not to be 1"
+    assert repr(matcher) == "To not be equal to 1"
     matcher = ~Eq(1)
-    assert repr(matcher) == "Not to be 1"
+    assert repr(matcher) == "To not be equal to 1"
     matcher = Not(6)
-    assert repr(matcher) == "Not to be 6"
+    assert repr(matcher) == "To not be equal to 6"
     matcher = Not(IsInstance(int))
-    assert repr(matcher) == "Not of 'int' instance"
+    assert repr(matcher) == "To not be of 'int' instance"
     matcher = Not(Not(IsInstance(int)))
     assert repr(matcher) == repr(IsInstance(int))
 

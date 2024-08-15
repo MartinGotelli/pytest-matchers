@@ -1,6 +1,6 @@
 import pytest
 
-from pytest_matchers.matchers import Between
+from pytest_matchers.matchers import Between, Eq
 
 
 def test_create():
@@ -12,6 +12,8 @@ def test_create():
     assert isinstance(matcher, Between)
     matcher = Between(1, 2, max_inclusive=False)
     assert isinstance(matcher, Between)
+    matcher = Between(1, 1)
+    assert isinstance(matcher, Eq)
     with pytest.raises(
         ValueError,
         match="Cannot specify inclusive and min_inclusive or max_inclusive",
@@ -37,6 +39,8 @@ def test_repr():
     assert repr(matcher) == "To be greater or equal than 1"
     matcher = Between(None, 2, max_inclusive=False)
     assert repr(matcher) == "To be lower than 2"
+    matcher = Between(1, 1)
+    assert repr(matcher) == "To be 1"
 
 
 def test_concatenated_repr():
@@ -52,6 +56,8 @@ def test_concatenated_repr():
     assert matcher.concatenated_repr() == "greater or equal than 1"
     matcher = Between(None, 2, max_inclusive=False)
     assert matcher.concatenated_repr() == "lower than 2"
+    matcher = Between(1, 1)
+    assert matcher.concatenated_repr() == "equal to 1"
 
 
 def test_matches_float_inclusive():

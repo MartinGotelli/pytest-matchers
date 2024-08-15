@@ -12,4 +12,4 @@ class Or(Matcher):
         return any(matcher == value for matcher in self._matchers)
 
     def __repr__(self) -> str:
-        return concat_reprs("", *self._matchers, separator="or")
+        return concat_reprs("", repr(self._matchers[0]), *self._matchers[1:], separator="or")

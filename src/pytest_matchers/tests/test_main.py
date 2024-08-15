@@ -13,6 +13,7 @@ from pytest_matchers import (
     is_datetime_string,
     is_dict,
     is_instance,
+    is_json,
     is_list,
     is_number,
     is_string,
@@ -204,3 +205,15 @@ def test_is_dict():
     assert {1: "one", 8.9: [1, 2, 3], "cool": 30.5} == is_dict(
         {1: "one", 8.9: [1, 2, 3], "cool": is_number()}
     )
+
+
+def test_is_json():
+    assert "{}" == is_json()
+    assert '{"key": "value"}' == is_json()
+    assert '{"key": 4}' == is_json({"key": 4})
+    assert '{"key": 4}' != is_json({"key": 5})
+    assert '{"key": 4, "other": 10}' == is_json({"key": 4})
+    assert '{"key": 4}' != is_json({"other": 4})
+    assert '{"key": 4}' == is_json({"key": 4}, exclude=["other"])
+    assert '{"key": 4, "other": 10}' != is_json({"key": 4}, exclude=["other"])
+    assert '{"key": 4, "other": "string"}' == is_json({"key": 4, "other": is_string()})

@@ -27,9 +27,9 @@ def test_repr():
     matcher = If(lambda x: x == 3, 3)
     assert repr(matcher) == "To be 3 if condition returns True else to be anything"
     matcher = If(lambda x: x == 3, is_number(), 4)
-    assert repr(matcher) == "To be a number if condition returns True else to be 4"
+    assert repr(matcher) == "To be a number if condition returns True else equal to 4"
     matcher = If(lambda x: x == 3, or_else=is_string())
-    assert repr(matcher) == "To be anything if condition returns True else to be string"
+    assert repr(matcher) == "To be anything if condition returns True else to be a string"
 
 
 def test_match():

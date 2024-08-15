@@ -34,6 +34,8 @@ def test_repr():
     assert repr(matcher) == "To be a number greater or equal than 1 and lower than 2"
     matcher = IsNumber(float, min_value=1, max_value=2)
     assert repr(matcher) == "To be a number of 'float' instance and between 1 and 2"
+    matcher = IsNumber(min_value=1, max_value=1)
+    assert repr(matcher) == "To be a number equal to 1"
 
 
 def test_matches_number():

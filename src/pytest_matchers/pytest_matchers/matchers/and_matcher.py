@@ -12,4 +12,4 @@ class And(Matcher):
         return all(matcher == value for matcher in self._matchers)
 
     def __repr__(self) -> str:
-        return concat_reprs("", *self._matchers)
+        return concat_reprs("", repr(self._matchers[0]), *self._matchers[1:])

@@ -20,4 +20,4 @@ class Not(Matcher):
         return not self._matcher == value
 
     def __repr__(self) -> str:
-        return f"Not {self._matcher.concatenated_repr()}"
+        return f"To not be {self._matcher.concatenated_repr()}"

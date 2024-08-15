@@ -7,7 +7,7 @@ def test_create():
     assert isinstance(matcher, Dict)
     matcher = Dict({"key": 3})
     assert isinstance(matcher, Dict)
-    matcher = Dict({"key": 3}, ["other"])
+    matcher = Dict({"key": 3}, exclude=["other"])
     assert isinstance(matcher, Dict)
 
 
@@ -15,20 +15,20 @@ def test_repr():
     matcher = Dict()
     assert repr(matcher) == "To be a dictionary"
     matcher = Dict({"key": 3})
-    assert repr(matcher) == "To be a dictionary expecting 'key' to be 3"
+    assert repr(matcher) == "To be a dictionary expecting 'key' equal to 3"
     matcher = Dict({"key": 3, "other": "string"})
     assert (
         repr(matcher)
-        == "To be a dictionary expecting 'key' to be 3 and expecting 'other' to be 'string'"
+        == "To be a dictionary expecting 'key' equal to 3 and expecting 'other' equal to 'string'"
     )
     matcher = Dict(exclude=["key"])
     assert repr(matcher) == "To be a dictionary excluding 'key'"
-    matcher = Dict({"key": 3}, ["other"])
-    assert repr(matcher) == "To be a dictionary excluding 'other' and expecting 'key' to be 3"
+    matcher = Dict({"key": 3}, exclude=["other"])
+    assert repr(matcher) == "To be a dictionary excluding 'other' and expecting 'key' equal to 3"
     matcher = Dict({"key": is_string(), "any": anything(), "other": 3})
     assert (
-        repr(matcher) == "To be a dictionary expecting 'key' to be string and "
-        "expecting 'any' to be anything and expecting 'other' to be 3"
+        repr(matcher) == "To be a dictionary expecting 'key' to be a string and "
+        "expecting 'any' to be anything and expecting 'other' equal to 3"
     )
 
 

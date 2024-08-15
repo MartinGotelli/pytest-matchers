@@ -20,17 +20,17 @@ def test_create():
 
 def test_repr():
     matcher = IsString()
-    assert repr(matcher) == "To be string"
+    assert repr(matcher) == "To be a string"
     matcher = IsString(contains="ab")
-    assert repr(matcher) == "To be string containing 'ab'"
+    assert repr(matcher) == "To be a string containing 'ab'"
     matcher = IsString(starts_with="ab")
-    assert repr(matcher) == "To be string starting with 'ab'"
+    assert repr(matcher) == "To be a string starting with 'ab'"
     matcher = IsString(ends_with="bc")
-    assert repr(matcher) == "To be string ending with 'bc'"
+    assert repr(matcher) == "To be a string ending with 'bc'"
     matcher = IsString(length=1)
-    assert repr(matcher) == "To be string with length of 1"
+    assert repr(matcher) == "To be a string with length of 1"
     matcher = IsString(min_length=1, max_length=3)
-    assert repr(matcher) == "To be string with length between 1 and 3"
+    assert repr(matcher) == "To be a string with length between 1 and 3"
     matcher = IsString(
         contains="ab",
         starts_with="ab",
@@ -39,7 +39,7 @@ def test_repr():
         max_length=8,
     )
     assert (
-        repr(matcher) == "To be string with length between 1 and 8 and containing 'ab'"
+        repr(matcher) == "To be a string with length between 1 and 8 and containing 'ab'"
         " and starting with 'ab' and ending with 'bc'"
     )
 

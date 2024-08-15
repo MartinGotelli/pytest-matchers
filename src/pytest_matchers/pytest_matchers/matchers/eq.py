@@ -14,3 +14,6 @@ class Eq(Matcher):
 
     def __repr__(self) -> str:
         return f"To be {repr(self._match_value)}"
+
+    def concatenated_repr(self) -> str:
+        return f"equal to {repr(self._match_value)}"

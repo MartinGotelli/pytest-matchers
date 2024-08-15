@@ -27,5 +27,6 @@ class Matcher(ABC):
         pass
 
     def concatenated_repr(self) -> str:
-        base_repr = repr(self)
-        return base_repr[0].lower() + base_repr[1:]
+        from pytest_matchers.utils.repr_utils import non_capitalized
+
+        return non_capitalized(repr(self))

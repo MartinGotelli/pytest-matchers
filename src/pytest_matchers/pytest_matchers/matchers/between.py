@@ -1,7 +1,7 @@
 from typing import Any
 
-from pytest_matchers.matchers import Matcher
-from pytest_matchers.utils.repr_utils import concat_reprs
+from pytest_matchers.matchers import Eq, Matcher
+from pytest_matchers.utils.repr_utils import concat_reprs, non_capitalized
 
 
 class Between(Matcher):
@@ -23,6 +23,11 @@ class Between(Matcher):
             min_inclusive, max_inclusive = inclusive, inclusive
         self._min_inclusive = min_inclusive or min_inclusive is None
         self._max_inclusive = max_inclusive or max_inclusive is None
+
+    def __new__(cls, min_value, max_value, inclusive=None, min_inclusive=None, max_inclusive=None):
+        if min_value is not None and min_value == max_value:
+            return Eq(min_value)
+        return super().__new__(cls)
 
     def matches(self, value: Any) -> bool:
         try:
@@ -53,7 +58,7 @@ class Between(Matcher):
         min_repr = self._min_repr()
         max_repr = self._max_repr()
         suffix = concat_reprs("", min_repr, max_repr)
-        return suffix[0].lower() + suffix[1:]
+        return non_capitalized(suffix)
 
     def __repr__(self) -> str:
         return f"To be {self._suffix_repr()}"
