@@ -16,6 +16,7 @@ from pytest_matchers import (
     is_instance,
     is_list,
     is_number,
+    is_strict_dict,
     is_string,
     same_value,
 )
@@ -168,4 +169,25 @@ def test_compare_dictionaries():
             "c": True,
         },
         exclude=["e"],
+    )
+
+
+def test_compare_strict_dictionaries():
+    def _condition(value):
+        return value == is_string()
+
+    test_dict = {"a": 1, "b": [2, "string"], "c": True}
+    assert test_dict == is_strict_dict({"a": 1, "b": [2, "string"], "c": True})
+    assert test_dict != is_strict_dict({"a": 1, "b": [2, "string"]})
+    assert test_dict == is_strict_dict(
+        {"a": 1, "b": [2, "string"]},
+        extra_condition=_condition("string"),
+        when_true={"c": True},
+        when_false={"c": False},
+    )
+    assert test_dict != is_strict_dict(
+        {"a": 1, "b": [2, "string"]},
+        extra_condition=_condition(10),
+        when_true={"c": True},
+        when_false={"c": False},
     )

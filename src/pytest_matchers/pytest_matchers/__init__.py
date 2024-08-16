@@ -13,6 +13,7 @@ from .main import (
     is_json,
     is_list,
     is_number,
+    is_strict_dict,
     is_string,
     one_of,
     same_value,

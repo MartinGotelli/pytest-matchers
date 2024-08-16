@@ -18,6 +18,7 @@ from pytest_matchers.matchers import (
     Matcher,
     Or,
     SameValue,
+    StrictDict,
 )
 
 
@@ -118,6 +119,21 @@ def case(
 
 def is_dict(matching: dict = None, *, exclude: list[Any] = None) -> Dict:
     return Dict(matching, exclude=exclude)
+
+
+def is_strict_dict(
+    matching: dict,
+    *,
+    extra_condition: bool = None,
+    when_true: dict = None,
+    when_false: dict = None,
+) -> StrictDict:
+    return StrictDict(
+        matching,
+        extra_condition=extra_condition,
+        when_true=when_true,
+        when_false=when_false,
+    )
 
 
 def is_json(matching: dict = None, *, exclude: list[Any] = None) -> JSON:

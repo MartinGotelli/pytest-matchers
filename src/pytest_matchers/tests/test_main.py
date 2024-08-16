@@ -16,6 +16,7 @@ from pytest_matchers import (
     is_json,
     is_list,
     is_number,
+    is_strict_dict,
     is_string,
     one_of,
     same_value,
@@ -205,6 +206,32 @@ def test_is_dict():
     assert {1: "one", 8.9: [1, 2, 3], "cool": 30.5} == is_dict(
         {1: "one", 8.9: [1, 2, 3], "cool": is_number()}
     )
+
+
+def test_is_strict_dict():
+    assert {"key": 3} != is_strict_dict({})
+    assert {"key": 3} == is_strict_dict({"key": 3})
+    assert {"key": 3} != is_strict_dict({"key": 4})
+    assert {"key": 3, "other": 5} != is_strict_dict({"key": 3})
+    assert {"key": 3, "other": 4} == is_strict_dict(
+        {"key": 3},
+        extra_condition=True,
+        when_true={"other": 4},
+        when_false={"other": 5},
+    )
+    assert {"key": 3, "other": 4} != is_strict_dict(
+        {"key": 3},
+        extra_condition=False,
+        when_true={"other": 4},
+        when_false={"other": 5},
+    )
+    assert {"key": "hey"} != is_strict_dict(
+        {},
+        extra_condition=False,
+        when_true={"key": is_string()},
+    )
+    # pylint: disable=use-implicit-booleaness-not-comparison
+    assert {} == is_strict_dict({}, extra_condition=False, when_true={"key": is_string()})
 
 
 def test_is_json():
