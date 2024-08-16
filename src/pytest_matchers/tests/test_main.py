@@ -1,5 +1,7 @@
+import uuid
 from datetime import datetime
 from unittest.mock import MagicMock
+from uuid import uuid4
 
 from pytest_matchers import (
     anything,
@@ -18,6 +20,7 @@ from pytest_matchers import (
     is_number,
     is_strict_dict,
     is_string,
+    is_uuid,
     one_of,
     same_value,
 )
@@ -244,3 +247,13 @@ def test_is_json():
     assert '{"key": 4}' == is_json({"key": 4}, exclude=["other"])
     assert '{"key": 4, "other": 10}' != is_json({"key": 4}, exclude=["other"])
     assert '{"key": 4, "other": "string"}' == is_json({"key": 4, "other": is_string()})
+
+
+def test_is_uuid():
+    assert uuid4() == is_uuid()
+    assert uuid4() == is_uuid(version=4)
+    assert uuid4() != is_uuid(version=5)
+    assert uuid4() != is_uuid(str)
+    assert str(uuid4()) == is_uuid()
+    assert str(uuid4()) == is_uuid(str)
+    assert str(uuid4()) != is_uuid(uuid.UUID)

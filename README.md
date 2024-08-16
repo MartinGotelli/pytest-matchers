@@ -76,3 +76,7 @@ Actual   :0.9048172867693559
 - `if_true`
 - `if_false`
 - `case`
+- `is_dict`
+- `is_strict_dict`
+- `is_json`
+- `is_uuid`

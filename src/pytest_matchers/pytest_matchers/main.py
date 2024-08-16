@@ -19,6 +19,7 @@ from pytest_matchers.matchers import (
     Or,
     SameValue,
     StrictDict,
+    UUID,
 )
 
 
@@ -138,3 +139,7 @@ def is_strict_dict(
 
 def is_json(matching: dict = None, *, exclude: list[Any] = None) -> JSON:
     return JSON(matching, exclude=exclude)
+
+
+def is_uuid(matching_type: Type = None, *, version: int | Matcher = None) -> UUID:
+    return UUID(matching_type, version=version)

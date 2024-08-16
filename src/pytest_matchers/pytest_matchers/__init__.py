@@ -15,6 +15,7 @@ from .main import (
     is_number,
     is_strict_dict,
     is_string,
+    is_uuid,
     one_of,
     same_value,
 )
