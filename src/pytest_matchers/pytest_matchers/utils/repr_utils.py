@@ -1,10 +1,12 @@
+from typing import Any
+
 from pytest_matchers.matchers import Matcher
 
 
-def _repr(extra_repr: str | Matcher | None) -> str:
+def _repr(extra_repr: Any | Matcher | None) -> str:
     if isinstance(extra_repr, Matcher):
         return extra_repr.concatenated_repr()
-    return extra_repr
+    return str(extra_repr) if extra_repr is not None else ""
 
 
 def concat_matcher_repr(matcher: Matcher | None) -> str:

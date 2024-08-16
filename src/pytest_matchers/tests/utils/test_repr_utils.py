@@ -13,7 +13,7 @@ def test_concat_matcher_repr():
     matcher = Eq(3)
     assert concat_matcher_repr(matcher) == "equal to 3"
     matcher = None
-    assert concat_matcher_repr(matcher) is None
+    assert concat_matcher_repr(matcher) == ""
 
 
 def test_concat_reprs():

@@ -1,6 +1,8 @@
+import uuid
 from datetime import datetime
 from random import random
 from unittest.mock import MagicMock
+from uuid import NAMESPACE_DNS, uuid3, uuid4, uuid5
 
 from pytest_matchers import (
     anything,
@@ -18,6 +20,8 @@ from pytest_matchers import (
     is_number,
     is_strict_dict,
     is_string,
+    is_uuid,
+    one_of,
     same_value,
 )
 
@@ -191,3 +195,15 @@ def test_compare_strict_dictionaries():
         when_true={"c": True},
         when_false={"c": False},
     )
+
+
+def test_uuids():
+    assert uuid4() == is_uuid()
+    assert str(uuid4()) == is_uuid()
+    assert uuid4() != is_uuid(version=1)
+    assert uuid4() == is_uuid(version=4)
+    assert str(uuid4()) != is_uuid(uuid.UUID)
+    assert uuid4() != is_uuid(str)
+    for uuid_value in (uuid3(NAMESPACE_DNS, "python.org"), uuid4()):
+        assert uuid_value == is_uuid(version=one_of(3, 4))
+    assert uuid5(NAMESPACE_DNS, "python.org") != is_uuid(version=one_of(3, 4))
