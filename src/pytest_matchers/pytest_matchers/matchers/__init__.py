@@ -23,3 +23,4 @@ from .if_matcher import If
 from .case import Case
 from .dict import Dict
 from .json import JSON
+from .strict_dict import StrictDict

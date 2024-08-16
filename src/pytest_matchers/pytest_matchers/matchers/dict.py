@@ -24,7 +24,7 @@ class Dict(Matcher):
                 return False
         return True
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return concat_reprs("To be a dictionary", self.expectations_repr())
 
     def expectations_repr(self):
