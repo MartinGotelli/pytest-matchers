@@ -29,7 +29,7 @@ from src.tests.conftest import CustomEqual
 
 
 def test_deal_with_custom_equals():
-    assert not CustomEqual(3) == is_instance(CustomEqual)
+    assert not CustomEqual(3) == is_instance(CustomEqual)  # pylint: disable=unnecessary-negation
     assert is_instance(CustomEqual) == CustomEqual(3)
     assert_match(CustomEqual(3), is_instance(CustomEqual))
 
