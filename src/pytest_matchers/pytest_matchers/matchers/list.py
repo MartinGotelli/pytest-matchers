@@ -1,6 +1,7 @@
 from typing import Any, Callable, Type
 
 from pytest_matchers.matchers import IsInstance, Matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.utils.matcher_utils import (
     is_instance_matcher,
     length_matcher,
@@ -10,7 +11,8 @@ from pytest_matchers.utils.matcher_utils import (
 from pytest_matchers.utils.repr_utils import concat_reprs
 
 
-class IsList(Matcher):
+@matcher
+class List(Matcher):
     def __init__(
         self,
         match_type: Type = None,
@@ -19,6 +21,7 @@ class IsList(Matcher):
         min_length: int = None,
         max_length: int = None,
     ):
+        super().__init__()
         self._is_instance_matcher = is_instance_matcher(match_type)
         self._length_matcher = length_matcher(length, min_length, max_length)
 

@@ -1,10 +1,13 @@
 from typing import Any
 
 from pytest_matchers.matchers import Matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 
 
+@matcher
 class SameValue(Matcher):
     def __init__(self):
+        super().__init__()
         self._matched_value = None
 
     def matches(self, value: Any) -> bool:

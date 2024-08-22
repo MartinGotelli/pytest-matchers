@@ -1,10 +1,12 @@
 from typing import Any
 
 from pytest_matchers.matchers import IsInstance, Matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.utils.matcher_utils import as_matcher
 from pytest_matchers.utils.repr_utils import concat_reprs, non_capitalized
 
 
+@matcher
 class StrictDict(Matcher):
     def __init__(
         self,
@@ -14,6 +16,7 @@ class StrictDict(Matcher):
         when_true: dict = None,
         when_false: dict = None,
     ):
+        super().__init__()
         self._is_instance_matcher = IsInstance(dict)
         self._matching = matching
         if (when_true or when_false) and extra_condition is None:

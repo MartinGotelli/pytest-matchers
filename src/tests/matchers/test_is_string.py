@@ -1,37 +1,37 @@
 import pytest
 
-from pytest_matchers.matchers import IsString
+from pytest_matchers.matchers import String
 
 
 def test_create():
-    matcher = IsString()
-    assert isinstance(matcher, IsString)
-    matcher = IsString(starts_with="a", ends_with="b", contains="c")
-    assert isinstance(matcher, IsString)
-    matcher = IsString(length=1)
-    assert isinstance(matcher, IsString)
+    matcher = String()
+    assert isinstance(matcher, String)
+    matcher = String(starts_with="a", ends_with="b", contains="c")
+    assert isinstance(matcher, String)
+    matcher = String(length=1)
+    assert isinstance(matcher, String)
 
     with pytest.raises(
         ValueError,
         match="Cannot specify length with min_length or max_length",
     ):
-        IsString(min_length=1, max_length=4, length=2)
+        String(min_length=1, max_length=4, length=2)
 
 
 def test_repr():
-    matcher = IsString()
+    matcher = String()
     assert repr(matcher) == "To be a string"
-    matcher = IsString(contains="ab")
+    matcher = String(contains="ab")
     assert repr(matcher) == "To be a string containing 'ab'"
-    matcher = IsString(starts_with="ab")
+    matcher = String(starts_with="ab")
     assert repr(matcher) == "To be a string starting with 'ab'"
-    matcher = IsString(ends_with="bc")
+    matcher = String(ends_with="bc")
     assert repr(matcher) == "To be a string ending with 'bc'"
-    matcher = IsString(length=1)
+    matcher = String(length=1)
     assert repr(matcher) == "To be a string with length of 1"
-    matcher = IsString(min_length=1, max_length=3)
+    matcher = String(min_length=1, max_length=3)
     assert repr(matcher) == "To be a string with length between 1 and 3"
-    matcher = IsString(
+    matcher = String(
         contains="ab",
         starts_with="ab",
         ends_with="bc",
@@ -45,14 +45,14 @@ def test_repr():
 
 
 def test_matches_type():
-    matcher = IsString()
+    matcher = String()
     assert matcher == "string"
     assert matcher != 20
     assert matcher != ["string"]
 
 
 def test_matches_exact_length():
-    matcher = IsString(length=1)
+    matcher = String(length=1)
     assert matcher == "a"
     assert matcher != ""
     assert matcher != "ab"
@@ -60,7 +60,7 @@ def test_matches_exact_length():
 
 
 def test_matches_min_and_max_length():
-    matcher = IsString(min_length=1, max_length=3)
+    matcher = String(min_length=1, max_length=3)
     assert matcher == "a"
     assert matcher == "ab"
     assert matcher == "abc"
@@ -69,7 +69,7 @@ def test_matches_min_and_max_length():
 
 
 def test_matches_contains():
-    matcher = IsString(contains="ab")
+    matcher = String(contains="ab")
     assert matcher == "ab"
     assert matcher == "abc"
     assert matcher == "dabc"
@@ -80,7 +80,7 @@ def test_matches_contains():
 
 
 def test_matches_starts_with():
-    matcher = IsString(starts_with="ab")
+    matcher = String(starts_with="ab")
     assert matcher == "ab"
     assert matcher == "abc"
     assert matcher != "dabc"
@@ -91,7 +91,7 @@ def test_matches_starts_with():
 
 
 def test_matches_ends_with():
-    matcher = IsString(ends_with="bc")
+    matcher = String(ends_with="bc")
     assert matcher == "abc"
     assert matcher == "bc"
     assert matcher != "dabcx"

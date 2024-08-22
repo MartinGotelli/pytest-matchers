@@ -1,10 +1,13 @@
 from typing import Any
 
 from pytest_matchers.matchers import Matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 
 
+@matcher
 class Length(Matcher):
     def __init__(self, length=None, min_length=None, max_length=None):
+        super().__init__()
         if length:
             if min_length or max_length:
                 raise ValueError("Cannot specify length with min_length or max_length")

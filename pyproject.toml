@@ -24,9 +24,13 @@ vulture = "^2.11"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
+[project.entry-points.pytest11]
+myproject = "pytest_matchers.plugin"
+
+
 [tool.coverage.run]
 branch = true
-command_line = "-m pytest src/pytest_matchers/tests"
+command_line = "-m pytest src/tests"
 
 [tool.coverage.report]
 show_missing = true

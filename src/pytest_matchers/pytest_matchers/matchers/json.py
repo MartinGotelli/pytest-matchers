@@ -3,12 +3,15 @@ from typing import Any
 
 from pytest_matchers.matchers import IsInstance, Matcher
 from pytest_matchers.matchers.dict import dict_matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.utils.matcher_utils import matches_or_none
 from pytest_matchers.utils.repr_utils import concat_reprs
 
 
+@matcher
 class JSON(Matcher):
     def __init__(self, matching: dict = None, *, exclude: list = None):
+        super().__init__()
         self._is_instance_matcher = IsInstance(str)
         self._dict_matcher = dict_matcher(matching, exclude)
 

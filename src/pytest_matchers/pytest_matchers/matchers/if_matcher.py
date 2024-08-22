@@ -1,11 +1,13 @@
 from typing import Any, Callable
 
 from pytest_matchers.matchers import Anything, Matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.utils.matcher_utils import as_matcher
 from pytest_matchers.utils.repr_utils import capitalized
 from pytest_matchers.utils.warn import warn
 
 
+@matcher
 class If(Matcher):
     def __init__(
         self,
@@ -13,15 +15,16 @@ class If(Matcher):
         then: Matcher | Any = None,
         or_else: Matcher | Any = None,
     ):
+        super().__init__()
         self._condition = condition
         self._then = as_matcher(then or Anything())
         self._or_else = as_matcher(or_else or Anything())
 
     def matches(self, value: Any) -> bool:
-        matcher = self._or_else
+        expect = self._or_else
         if self._satisfies_condition(value):
-            matcher = self._then
-        return matcher == value
+            expect = self._then
+        return expect == value
 
     def _satisfies_condition(self, value: Any) -> bool:
         if isinstance(self._condition, bool):

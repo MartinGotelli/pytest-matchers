@@ -1,10 +1,13 @@
 from typing import Any
 
 from pytest_matchers.matchers import Matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 
 
+@matcher
 class IsInstance(Matcher):
     def __init__(self, match_type):
+        super().__init__()
         self._match_type = match_type
 
     def matches(self, value: Any) -> bool:

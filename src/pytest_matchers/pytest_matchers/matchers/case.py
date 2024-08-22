@@ -1,9 +1,11 @@
 from typing import Any
 
 from pytest_matchers.matchers import Matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.utils.matcher_utils import as_matcher, as_matcher_or_none
 
 
+@matcher
 class Case(Matcher):
     def __init__(
         self,
@@ -11,6 +13,7 @@ class Case(Matcher):
         expectations: dict[Any, Matcher | Any],
         default_expectation: Matcher | Any | None = None,
     ):
+        super().__init__()
         self._case_value = case_value
         self._expectations = expectations
         self._default_expectation = (

@@ -1,6 +1,7 @@
 from typing import Any, Type
 
 from pytest_matchers.matchers import Matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.utils.matcher_utils import (
     between_matcher,
     is_instance_matcher,
@@ -9,7 +10,8 @@ from pytest_matchers.utils.matcher_utils import (
 from pytest_matchers.utils.repr_utils import concat_reprs
 
 
-class IsNumber(Matcher):
+@matcher
+class Number(Matcher):
     def __init__(
         self,
         match_type: Type = None,
@@ -20,6 +22,7 @@ class IsNumber(Matcher):
         min_inclusive: bool = None,
         max_inclusive: bool = None,
     ):
+        super().__init__()
         self._is_instance_matcher = is_instance_matcher(match_type)
         self._between_matcher = between_matcher(
             min_value,

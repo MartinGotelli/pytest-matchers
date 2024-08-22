@@ -3,8 +3,12 @@ from datetime import datetime
 from unittest.mock import MagicMock
 from uuid import uuid4
 
+import pytest
+
 from pytest_matchers import (
     anything,
+    assert_match,
+    assert_not_match,
     between,
     case,
     different_value,
@@ -24,6 +28,33 @@ from pytest_matchers import (
     one_of,
     same_value,
 )
+from src.tests.conftest import CustomEqual
+
+
+def test_assert_match():
+    assert is_instance(CustomEqual) == CustomEqual(3)
+    with pytest.raises(
+        AssertionError,
+        match="WARNING! Comparison failed because the left object redefines the equality operator.",
+    ):
+        assert CustomEqual(3) == is_instance(CustomEqual)
+    assert_match(is_instance(CustomEqual), CustomEqual(3))
+    assert_match(CustomEqual(3), is_instance(CustomEqual))
+    with pytest.raises(AssertionError):
+        assert_match(is_instance(str), CustomEqual(3))
+
+
+def test_assert_not_match():
+    assert is_instance(str) != CustomEqual(3)
+    with pytest.raises(
+        AssertionError,
+        match="WARNING! Comparison failed because the left object redefines the equality operator.",
+    ):
+        assert CustomEqual(3) != is_instance(str)
+    assert_not_match(is_instance(str), CustomEqual(3))
+    assert_not_match(CustomEqual(3), is_instance(str))
+    with pytest.raises(AssertionError):
+        assert_not_match(is_instance(CustomEqual), CustomEqual(3))
 
 
 def test_anything():
