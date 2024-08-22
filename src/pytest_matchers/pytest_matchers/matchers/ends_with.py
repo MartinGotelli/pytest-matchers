@@ -1,10 +1,13 @@
 from typing import Any, Sized
 
 from pytest_matchers.matchers import Matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 
 
+@matcher
 class EndsWith(Matcher):
     def __init__(self, suffix: Sized | str):
+        super().__init__()
         self._suffix = suffix
 
     def matches(self, value: Any) -> bool:

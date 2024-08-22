@@ -1,11 +1,14 @@
 from typing import Any
 
 from pytest_matchers.matchers import Matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.utils.matcher_utils import as_matcher, matches_or_none
 
 
+@matcher
 class HasAttribute(Matcher):
     def __init__(self, attribute_name: str, expected_value: Any = None):
+        super().__init__()
         self._attribute_name = attribute_name
         self._expected_value = expected_value
         self._expected_value_matcher = as_matcher(expected_value) if expected_value else None

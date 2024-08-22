@@ -1,12 +1,15 @@
 from typing import Any
 
 from pytest_matchers.matchers import IsInstance, Matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.utils.matcher_utils import as_matcher
 from pytest_matchers.utils.repr_utils import concat_reprs, non_capitalized
 
 
+@matcher
 class Dict(Matcher):
     def __init__(self, matching: dict = None, *, exclude: list = None):
+        super().__init__()
         self._is_instance_matcher = IsInstance(dict)
         self._matching = matching or {}
         self._exclude = exclude or []
@@ -19,8 +22,8 @@ class Dict(Matcher):
         )
 
     def _matches_values(self, value: dict) -> bool:
-        for key, matcher in self._matching.items():
-            if key not in value or not matcher == value.get(key):
+        for key, expect in self._matching.items():
+            if key not in value or not expect == value.get(key):
                 return False
         return True
 

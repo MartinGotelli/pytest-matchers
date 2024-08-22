@@ -1,6 +1,7 @@
 from typing import Any
 
 from pytest_matchers.matchers import IsInstance, Matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.utils.matcher_utils import (
     contains_matcher,
     ends_with_matcher,
@@ -11,7 +12,8 @@ from pytest_matchers.utils.matcher_utils import (
 from pytest_matchers.utils.repr_utils import concat_reprs
 
 
-class IsString(Matcher):
+@matcher
+class String(Matcher):
     def __init__(
         self,
         *,
@@ -22,6 +24,7 @@ class IsString(Matcher):
         max_length: int = None,
         min_length: int = None,
     ):
+        super().__init__()
         self._starts_with_matcher = starts_with_matcher(starts_with)
         self._ends_with_matcher = ends_with_matcher(ends_with)
         self._contains_matcher = contains_matcher(contains)

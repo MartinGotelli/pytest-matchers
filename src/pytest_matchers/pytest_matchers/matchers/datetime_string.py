@@ -1,10 +1,12 @@
 from datetime import datetime
 
-from pytest_matchers.matchers import IsString, Matcher
+from pytest_matchers.matchers import String, Matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.utils.matcher_utils import between_matcher, matches_or_none
 from pytest_matchers.utils.repr_utils import concat_reprs
 
 
+@matcher
 class DatetimeString(Matcher):
     def __init__(
         self,
@@ -13,6 +15,7 @@ class DatetimeString(Matcher):
         min_value: datetime | str = None,
         max_value: datetime | str = None,
     ):
+        super().__init__()
         self._expected_format = expected_format
         self._between_matcher = between_matcher(
             self._as_datetime(min_value, "min_value"),
@@ -38,7 +41,7 @@ class DatetimeString(Matcher):
         return None
 
     def matches(self, value: str) -> bool:
-        return IsString() == value and self._matches_format_and_limit(value)
+        return String() == value and self._matches_format_and_limit(value)
 
     def _matches_format_and_limit(self, value: str) -> bool:
         try:

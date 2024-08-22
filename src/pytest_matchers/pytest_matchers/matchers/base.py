@@ -4,8 +4,15 @@ from typing import Any
 
 
 class Matcher(ABC):
+    def __init__(self):
+        self._compared_values = []
+        self._compared_values_index = 0
+
     def __eq__(self, other: Any) -> bool:
-        return self.matches(other)
+        result = self.matches(other)
+        if result:
+            self._compared_values.append(other)
+        return result
 
     def __and__(self, other: "Matcher") -> "Matcher":
         from pytest_matchers.matchers import And
@@ -22,6 +29,9 @@ class Matcher(ABC):
 
         return Not(self)
 
+    def __hash__(self):
+        return hash(id(self))
+
     @abstractmethod
     def matches(self, value: Any) -> bool:
         pass
@@ -30,3 +40,12 @@ class Matcher(ABC):
         from pytest_matchers.utils.repr_utils import non_capitalized
 
         return non_capitalized(repr(self))
+
+    def next_compared_value_repr(self) -> str:
+        try:
+            compare_value = self._compared_values[self._compared_values_index]
+            self._compared_values_index += 1
+            value = compare_value
+            return f"{value!r}"
+        except IndexError:
+            return repr(self)

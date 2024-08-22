@@ -1,9 +1,11 @@
 from typing import Any
 
 from pytest_matchers.matchers import Eq, Matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.utils.repr_utils import concat_reprs, non_capitalized
 
 
+@matcher
 class Between(Matcher):
     def __init__(
         self,
@@ -13,6 +15,7 @@ class Between(Matcher):
         min_inclusive: bool = None,
         max_inclusive: bool = None,
     ):
+        super().__init__()
         if min_value is None and max_value is None:
             raise ValueError("At least one of min or max must be specified")
         self._min = min_value

@@ -2,6 +2,7 @@ from datetime import datetime
 
 from pytest_matchers.matchers import Matcher
 from pytest_matchers.matchers.has_attribute import has_attribute_matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.utils.matcher_utils import (
     between_matcher,
     is_instance_matcher,
@@ -10,6 +11,7 @@ from pytest_matchers.utils.matcher_utils import (
 from pytest_matchers.utils.repr_utils import concat_reprs
 
 
+@matcher
 class Datetime(Matcher):  # pylint: disable=too-many-instance-attributes
     def __init__(
         self,
@@ -22,6 +24,7 @@ class Datetime(Matcher):  # pylint: disable=too-many-instance-attributes
         minute: int = None,
         second: int = None,
     ):
+        super().__init__()
         self._is_instance_matcher = is_instance_matcher(datetime)
         self._limit_matcher = between_matcher(min_value, max_value, None, None, None)
         self._year_matcher = has_attribute_matcher("year", year, value_needed=True)

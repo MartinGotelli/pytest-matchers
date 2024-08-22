@@ -1,10 +1,13 @@
 from typing import Any, Sized
 
 from pytest_matchers.matchers import Matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 
 
+@matcher
 class StartsWith(Matcher):
     def __init__(self, prefix: Sized | str):
+        super().__init__()
         self._prefix = prefix
 
     def matches(self, value: Any) -> bool:

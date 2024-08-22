@@ -6,6 +6,7 @@ from uuid import NAMESPACE_DNS, uuid3, uuid4, uuid5
 
 from pytest_matchers import (
     anything,
+    assert_match,
     between,
     case,
     different_value,
@@ -24,6 +25,13 @@ from pytest_matchers import (
     one_of,
     same_value,
 )
+from src.tests.conftest import CustomEqual
+
+
+def test_deal_with_custom_equals():
+    assert not CustomEqual(3) == is_instance(CustomEqual)  # pylint: disable=unnecessary-negation
+    assert is_instance(CustomEqual) == CustomEqual(3)
+    assert_match(CustomEqual(3), is_instance(CustomEqual))
 
 
 def test_random_number():
