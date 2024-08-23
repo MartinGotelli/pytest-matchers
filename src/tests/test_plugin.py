@@ -4,6 +4,10 @@ from pytest_matchers import is_instance, is_string
 from src.tests.conftest import CustomEqual
 
 
+def _low_pytest_version():
+    return int(pytest.__version__[0]) < 8
+
+
 @pytest.fixture(autouse=True)
 def _set_verbosity(request):
     previous_verbosity = request.config.option.verbose
@@ -42,6 +46,10 @@ def _expected_list_diff(results: list) -> str:
     return "\n  ".join(message)
 
 
+@pytest.mark.skipif(
+    _low_pytest_version(),
+    reason="The custom assert_repr is only available in pytest 8 or higher.",
+)
 def test_non_custom_assert_repr():
     actual = "string"
     expected = is_instance(int)
@@ -87,6 +95,10 @@ def test_custom_assert_repr_dictionary():
         assert str(error) == _expected_warning(actual, expected, "==")
 
 
+@pytest.mark.skipif(
+    _low_pytest_version(),
+    reason="The custom assert_repr is only available in pytest 8 or higher.",
+)
 def test_custom_assert_repr_dictionary_matcher_replace():
     custom = CustomEqual(3)
     actual = {
@@ -133,6 +145,10 @@ def test_custom_assert_repr_list():
         assert str(error) == _expected_warning(actual, expected, "==")
 
 
+@pytest.mark.skipif(
+    _low_pytest_version(),
+    reason="The custom assert_repr is only available in pytest 8 or higher.",
+)
 def test_custom_assert_repr_list_matcher_replace():
     custom = CustomEqual(3)
     actual = ["hey", custom]
