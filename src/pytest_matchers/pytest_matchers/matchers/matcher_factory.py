@@ -1,6 +1,9 @@
 from typing import IO
 
-from _pytest._io.pprint import PrettyPrinter
+try:
+    from _pytest._io.pprint import PrettyPrinter
+except ImportError:  # pragma: no cover
+    from pprint import PrettyPrinter
 
 from pytest_matchers.matchers import Matcher
 
