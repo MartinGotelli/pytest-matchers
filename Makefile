@@ -31,7 +31,7 @@ install_hooks:
 install_shell_support:
 	@scripts/install_shell_support.sh
 
-quality: lint vulture spell black tests
+quality: lint vulture spell black compat-coverage coverage
 
 format:
 	black $(FOLDERS)
@@ -41,6 +41,11 @@ black:
 
 coverage:
 	coverage run && coverage report --skip-covered
+
+compat-coverage:
+	pip install -r requirements_min.txt > /dev/null 2>&1
+	-@make coverage
+	pip install -r requirements_dev.txt > /dev/null 2>&1
 
 coverage_html:
 	coverage run && coverage html
