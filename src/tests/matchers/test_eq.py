@@ -11,11 +11,14 @@ def test_matches():
     assert 1 == Eq(1)
     assert 1 != Eq(2)
     assert Eq(1) == 1
+    assert Eq([]) == []  # pylint: disable=use-implicit-booleaness-not-comparison
+    assert Eq([]) != [1]
 
 
 def test_repr():
     assert repr(Eq(1)) == "To be 1"
     assert repr(Eq("string")) == "To be 'string'"
+    assert repr(Eq([])) == "To be []"
 
 
 def test_concatenated_repr():

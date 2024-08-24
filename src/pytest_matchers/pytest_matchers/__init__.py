@@ -3,6 +3,7 @@ from .main import (
     anything,
     between,
     case,
+    contains,
     different_value,
     has_attribute,
     if_false,
@@ -20,3 +21,8 @@ from .main import (
     one_of,
     same_value,
 )
+
+try:
+    from .pydantic.main import is_pydantic, is_pydantic_v1
+except ImportError:  # pragma: no cover
+    pass

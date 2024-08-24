@@ -36,7 +36,9 @@ def test_concatenated_repr():
     matcher = HasAttribute("attribute_name", 42)
     assert matcher.concatenated_repr() == "with 'attribute_name' being 42"
     matcher = HasAttribute("attribute_name", is_string())
-    assert matcher.concatenated_repr() == "with 'attribute_name' expecting to be a string"
+    assert matcher.concatenated_repr() == "with 'attribute_name' expected to be a string"
+    matcher = HasAttribute("attribute_name", [])
+    assert matcher.concatenated_repr() == "with 'attribute_name' being []"
 
 
 def test_matches():
@@ -68,6 +70,17 @@ def test_matches_with_expect_value_as_matcher():
     matcher = HasAttribute("attribute_name", is_string())
     assert matcher != int_list_mock
     assert matcher == str_mock
+
+
+def test_matches_with_empty_values():
+    empty_value_mock = MagicMock(empty_value="")
+    matcher = HasAttribute("empty_value")
+    assert matcher == empty_value_mock
+    assert matcher != 3
+    matcher = HasAttribute("empty_value", "")
+    assert matcher == empty_value_mock
+    matcher = HasAttribute("empty_value", [])
+    assert matcher != empty_value_mock
 
 
 def test_has_attribute_matcher():

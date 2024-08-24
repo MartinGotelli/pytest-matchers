@@ -35,6 +35,10 @@ jobs:
     - name: Test with pytest
       run: |
         make coverage
+    - name: Min versions tests
+      run: |
+        pip install -r requirements_min.txt
+        make coverage
     - name: Spelling check with codespell
       run: |
         make spell

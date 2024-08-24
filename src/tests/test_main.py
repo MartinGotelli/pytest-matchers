@@ -11,6 +11,7 @@ from pytest_matchers import (
     assert_not_match,
     between,
     case,
+    contains,
     different_value,
     has_attribute,
     if_false,
@@ -138,6 +139,16 @@ def test_between():
     assert 1 != between(1, 3, min_inclusive=False)
     assert 3 == between(1, 3, min_inclusive=False)
     assert "c" == between("a", "d")
+
+
+def test_contains():
+    assert ["a", "b", "c"] == contains("a")
+    assert ["a", "b", "c"] == contains("a", "b")
+    assert ["a", "b", "c"] == contains("a", "b", "c")
+    assert ["a", "b", "c"] != contains("d")
+    assert ["a", "b", "c"] != contains(["a", "b"])
+    assert "Hello!" == contains("Hello")
+    assert "Hello!" != contains("Hi")
 
 
 def test_is_datetime():

@@ -19,6 +19,7 @@ from pytest_matchers import (
     is_instance,
     is_list,
     is_number,
+    is_pydantic,
     is_strict_dict,
     is_string,
     is_uuid,
@@ -26,6 +27,7 @@ from pytest_matchers import (
     same_value,
 )
 from src.tests.conftest import CustomEqual
+from src.tests.pydantic.conftest import BaseModel
 
 
 def test_deal_with_custom_equals():
@@ -215,3 +217,26 @@ def test_uuids():
     for uuid_value in (uuid3(NAMESPACE_DNS, "python.org"), uuid4()):
         assert uuid_value == is_uuid(version=one_of(3, 4))
     assert uuid5(NAMESPACE_DNS, "python.org") != is_uuid(version=one_of(3, 4))
+
+
+def test_pydantic():
+    class Animal(BaseModel):  # pylint: disable=too-few-public-methods
+        age: int
+        name: str
+
+    class Human(Animal):  # pylint: disable=too-few-public-methods
+        money: float = 0
+
+    class Dog(Animal):  # pylint: disable=too-few-public-methods
+        breed: str = "Mongrel"
+
+    messi = Human(age=33, name="Messi")
+    lassie = Dog(age=3, name="Lassie", breed="Collie")
+    tweety = Animal(age=1, name="Tweety")
+
+    assert_match(messi, is_pydantic())
+    assert_match(lassie, is_pydantic())
+    assert_match(messi, is_pydantic(Human))
+    assert_match(lassie, is_pydantic(Dog, age=3, name="Lassie", breed="Collie"))
+    assert_match(tweety, is_pydantic(age=1))
+    assert_match(messi, is_pydantic(Human, age=33, strict=False))
