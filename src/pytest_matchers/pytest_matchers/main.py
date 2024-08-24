@@ -1,9 +1,11 @@
 from typing import Any, Callable, Type
 
 from pytest_matchers.matchers import (
+    And,
     Anything,
     Between,
     Case,
+    Contains,
     Datetime,
     DatetimeString,
     Dict,
@@ -11,14 +13,14 @@ from pytest_matchers.matchers import (
     HasAttribute,
     If,
     IsInstance,
-    List,
-    Number,
-    String,
     JSON,
+    List,
     Matcher,
+    Number,
     Or,
     SameValue,
     StrictDict,
+    String,
     UUID,
 )
 
@@ -62,6 +64,10 @@ def between(
     max_inclusive: bool = None,
 ) -> Between:
     return Between(min_value, max_value, inclusive, min_inclusive, max_inclusive)
+
+
+def contains(*values: Any) -> And:
+    return And(*[Contains(value) for value in values])
 
 
 def is_datetime(

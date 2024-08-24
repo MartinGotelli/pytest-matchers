@@ -130,7 +130,7 @@ validate_env:
 	fi
 
 requirements_dev:
-	poetry export --without-hashes --with=dev -o $(or $(OUTFILE),requirements_dev.txt)
+	poetry export --without-hashes --with=dev --all-extras -o $(or $(OUTFILE),requirements_dev.txt)
 
 requirements_prod:
-	poetry export --without-hashes -o $(or $(OUTFILE),requirements.txt)
+	poetry export --without-hashes --all-extras -o $(or $(OUTFILE),requirements.txt)

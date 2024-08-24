@@ -68,6 +68,19 @@ def test_custom_assert_repr():
         assert str(error) == _expected_warning(actual, expected, "==")
 
 
+def test_custom_assert_repr_not_triggered():
+    actual = CustomEqual(3)
+    fail_matcher = is_instance(str)
+    try:
+        assert fail_matcher == actual
+    except AssertionError as error:
+        assert "WARNING" not in str(error)
+    try:
+        assert actual == fail_matcher
+    except AssertionError as error:
+        assert "WARNING" not in str(error)
+
+
 def test_custom_assert_repr_not():
     actual = CustomEqual(3)
     expected = is_instance(str)
@@ -75,6 +88,19 @@ def test_custom_assert_repr_not():
         assert actual != expected
     except AssertionError as error:
         assert str(error) == _expected_warning(actual, expected, "!=")
+
+
+def test_custom_assert_repr_not_not_triggered():
+    actual = CustomEqual(3)
+    fail_matcher = is_instance(CustomEqual)
+    try:
+        assert fail_matcher != actual
+    except AssertionError as error:
+        assert "WARNING" not in str(error)
+    try:
+        assert actual != fail_matcher
+    except AssertionError as error:
+        assert "WARNING" not in str(error)
 
 
 def test_custom_assert_repr_dictionary():

@@ -17,11 +17,7 @@ def _matches_operation(operation, actual: Any, expected: Matcher) -> bool:
 @pytest.hookimpl()
 def pytest_assertrepr_compare(config, op: str, left: Any, right: Any):
     del config
-    if (
-        MatcherDetector(left).uses_matchers()
-        or MatcherDetector(right).uses_matchers()
-        and _matches_operation(op, left, right)
-    ):
+    if MatcherDetector(right).uses_matchers() and _matches_operation(op, left, right):
         return [
             f"{left!r} {op} {right!r}",
             "",
