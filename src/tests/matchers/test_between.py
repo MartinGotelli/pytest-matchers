@@ -1,6 +1,7 @@
 import pytest
 
 from pytest_matchers.matchers import Between, Eq
+from pytest_matchers.matchers.between import between_matcher
 
 
 def test_create():
@@ -129,3 +130,17 @@ def test_matches_without_max():
     assert matcher == 30000
     assert matcher != 0
     assert matcher != "string"
+
+
+def test_between_matcher():
+    matcher = between_matcher(1, 2, None, None, None)
+    assert isinstance(matcher, Between)
+    assert matcher == 1
+    matcher = between_matcher(None, 2, True, None, None)
+    assert isinstance(matcher, Between)
+    assert matcher == 2
+    matcher = between_matcher(1, None, None, False, None)
+    assert isinstance(matcher, Between)
+    assert matcher == 2
+    matcher = between_matcher(None, None, True, None, None)
+    assert matcher is None

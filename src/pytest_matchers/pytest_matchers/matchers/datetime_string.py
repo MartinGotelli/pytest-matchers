@@ -2,7 +2,8 @@ from datetime import datetime
 
 from pytest_matchers.matchers import String, Matcher
 from pytest_matchers.matchers.matcher_factory import matcher
-from pytest_matchers.utils.matcher_utils import between_matcher, matches_or_none
+from pytest_matchers.utils.matcher_utils import matches_or_none
+from pytest_matchers.matchers.between import between_matcher
 from pytest_matchers.utils.repr_utils import concat_reprs
 
 

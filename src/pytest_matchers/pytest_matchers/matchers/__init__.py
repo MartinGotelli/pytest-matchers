@@ -1,10 +1,10 @@
 from .base import Matcher
 from .matcher_factory import MatcherFactory
+from .eq import Eq
 from .length import Length
 from .contains import Contains
 from .starts_with import StartsWith
 from .ends_with import EndsWith
-from .eq import Eq
 from .between import Between
 
 from .and_matcher import And

@@ -1,6 +1,7 @@
 from typing import Any
 
 from pytest_matchers.matchers import Matcher
+from pytest_matchers.utils.matcher_utils import as_matcher
 
 
 def _repr(extra_repr: Any | Matcher | None) -> str:
@@ -11,6 +12,10 @@ def _repr(extra_repr: Any | Matcher | None) -> str:
 
 def concat_matcher_repr(matcher: Matcher | None) -> str:
     return _repr(matcher)
+
+
+def as_matcher_repr(value: Any | Matcher | None) -> str:
+    return concat_matcher_repr(as_matcher(value))
 
 
 def concat_reprs(

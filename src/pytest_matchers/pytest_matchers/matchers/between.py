@@ -84,3 +84,21 @@ class Between(Matcher):
         return (
             f"lower or equal than {self._max}" if self._max_inclusive else f"lower than {self._max}"
         )
+
+
+def between_matcher(
+    min_value: float | None,
+    max_value: float | None,
+    inclusive: bool | None,
+    min_inclusive: bool | None,
+    max_inclusive: bool | None,
+) -> Between | None:
+    if min_value is None and max_value is None:
+        return None
+    return Between(
+        min_value,
+        max_value,
+        inclusive=inclusive,
+        min_inclusive=min_inclusive,
+        max_inclusive=max_inclusive,
+    )

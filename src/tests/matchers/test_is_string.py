@@ -22,11 +22,11 @@ def test_repr():
     matcher = String()
     assert repr(matcher) == "To be a string"
     matcher = String(contains="ab")
-    assert repr(matcher) == "To be a string containing 'ab'"
+    assert repr(matcher) == "To be a string containing something expected equal to 'ab'"
     matcher = String(starts_with="ab")
-    assert repr(matcher) == "To be a string starting with 'ab'"
+    assert repr(matcher) == "To be a string with start expected equal to 'ab'"
     matcher = String(ends_with="bc")
-    assert repr(matcher) == "To be a string ending with 'bc'"
+    assert repr(matcher) == "To be a string with ending expected equal to 'bc'"
     matcher = String(length=1)
     assert repr(matcher) == "To be a string with length of 1"
     matcher = String(min_length=1, max_length=3)
@@ -39,8 +39,9 @@ def test_repr():
         max_length=8,
     )
     assert (
-        repr(matcher) == "To be a string with length between 1 and 8 and containing 'ab'"
-        " and starting with 'ab' and ending with 'bc'"
+        repr(matcher) == "To be a string with length between 1 and 8 and "
+        "containing something expected equal to 'ab'"
+        " and with start expected equal to 'ab' and with ending expected equal to 'bc'"
     )
 
 

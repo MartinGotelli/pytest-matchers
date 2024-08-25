@@ -3,11 +3,11 @@ from typing import Any, Callable, Type
 from pytest_matchers.matchers import IsInstance, Matcher
 from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.utils.matcher_utils import (
-    is_instance_matcher,
-    length_matcher,
     matches_or_none,
     partial_matches_or_none,
 )
+from pytest_matchers.matchers.is_instance import is_instance_matcher
+from pytest_matchers.matchers.length import length_matcher
 from pytest_matchers.utils.repr_utils import concat_reprs
 
 

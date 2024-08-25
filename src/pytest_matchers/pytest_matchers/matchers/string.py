@@ -3,12 +3,12 @@ from typing import Any
 from pytest_matchers.matchers import IsInstance, Matcher
 from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.utils.matcher_utils import (
-    contains_matcher,
-    ends_with_matcher,
-    length_matcher,
     matches_or_none,
-    starts_with_matcher,
 )
+from pytest_matchers.matchers.contains import contains_matcher
+from pytest_matchers.matchers.length import length_matcher
+from pytest_matchers.matchers.starts_with import starts_with_matcher
+from pytest_matchers.matchers.ends_with import ends_with_matcher
 from pytest_matchers.utils.repr_utils import concat_reprs
 
 

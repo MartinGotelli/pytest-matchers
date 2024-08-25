@@ -1,6 +1,7 @@
 import pytest
 
 from pytest_matchers.matchers import Length
+from pytest_matchers.matchers.length import length_matcher
 
 
 def test_create():
@@ -74,3 +75,14 @@ def test_matches_without_limits():
     assert matcher.matches([1])
     assert matcher.matches([1, 2])
     assert not matcher.matches(1)
+
+
+def test_length_matcher():
+    matcher = length_matcher(None, 2, 3)
+    assert isinstance(matcher, Length)
+    assert matcher == "ab"
+    matcher = length_matcher(None, None, 3)
+    assert isinstance(matcher, Length)
+    assert matcher == [1, 2, 3]
+    matcher = length_matcher(None, None, None)
+    assert matcher is None
