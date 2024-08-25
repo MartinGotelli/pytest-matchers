@@ -30,6 +30,7 @@ from pytest_matchers import (
     is_number,
     is_strict_dict,
     is_string,
+    is_timestamp,
     is_uuid,
     not_empty_string,
     one_of,
@@ -209,6 +210,24 @@ def test_is_datetime():
         minute=14,
         second=15,
     )
+
+
+def test_is_timestamp():
+    date = datetime(2021, 1, 1)
+    assert 1612137600 == is_timestamp()
+    assert -1612137600 == is_timestamp()
+    assert date.timestamp() == is_timestamp(min_value=datetime(2021, 1, 1))
+    assert date.timestamp() == is_timestamp(max_value=datetime(2021, 1, 1))
+    assert date.timestamp() == is_timestamp(
+        min_value=datetime(2021, 1, 1),
+        max_value=datetime(2021, 1, 2),
+    )
+    assert date.timestamp() != is_timestamp(
+        min_value=datetime(2021, 1, 2),
+        max_value=datetime(2021, 1, 3),
+    )
+    assert date != is_timestamp()
+    assert "string" != is_timestamp()
 
 
 def test_is_datetime_string():

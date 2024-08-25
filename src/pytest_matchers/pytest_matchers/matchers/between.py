@@ -53,7 +53,7 @@ class Between(Matcher):
         return value < self._max
 
     def _suffix_repr(self) -> str:
-        if self._min and self._max:
+        if self._min is not None and self._max is not None:
             if self._min_inclusive and self._max_inclusive:
                 return f"between {self._min} and {self._max}"
             if not self._min_inclusive and not self._max_inclusive:
@@ -70,7 +70,7 @@ class Between(Matcher):
         return self._suffix_repr()
 
     def _min_repr(self):
-        if not self._min:
+        if self._min is None:
             return ""
         return (
             f"greater or equal than {self._min}"
@@ -79,7 +79,7 @@ class Between(Matcher):
         )
 
     def _max_repr(self):
-        if not self._max:
+        if self._max is None:
             return ""
         return (
             f"lower or equal than {self._max}" if self._max_inclusive else f"lower than {self._max}"

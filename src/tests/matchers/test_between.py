@@ -42,6 +42,10 @@ def test_repr():
     assert repr(matcher) == "To be lower than 2"
     matcher = Between(1, 1)
     assert repr(matcher) == "To be 1"
+    matcher = Between(0, None)
+    assert repr(matcher) == "To be greater or equal than 0"
+    matcher = Between(None, 0)
+    assert repr(matcher) == "To be lower or equal than 0"
 
 
 def test_concatenated_repr():
@@ -59,6 +63,10 @@ def test_concatenated_repr():
     assert matcher.concatenated_repr() == "lower than 2"
     matcher = Between(1, 1)
     assert matcher.concatenated_repr() == "equal to 1"
+    matcher = Between(0, None)
+    assert matcher.concatenated_repr() == "greater or equal than 0"
+    matcher = Between(None, 0)
+    assert matcher.concatenated_repr() == "lower or equal than 0"
 
 
 def test_matches_float_inclusive():
