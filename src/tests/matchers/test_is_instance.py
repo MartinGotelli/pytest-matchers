@@ -1,4 +1,5 @@
 from pytest_matchers.matchers import IsInstance
+from pytest_matchers.matchers.is_instance import is_instance_matcher
 
 
 def test_create():
@@ -28,3 +29,11 @@ def test_matches():
     assert 3 == IsInstance(int)
     assert 3 != IsInstance(str)
     assert "string" != IsInstance(int)
+
+
+def test_is_instance_matcher():
+    matcher = is_instance_matcher(str)
+    assert isinstance(matcher, IsInstance)
+    assert matcher == "string"
+    matcher = is_instance_matcher(None)
+    assert matcher is None

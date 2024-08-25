@@ -43,8 +43,24 @@ def is_string(**kwargs) -> String:
     return String(**kwargs)
 
 
+def not_empty_string(**kwargs) -> String:
+    min_length = 1
+    if "min_length" in kwargs:
+        min_length = kwargs.pop("min_length")
+
+    return is_string(min_length=min_length, **kwargs)
+
+
 def is_number(match_type: Type = None, **kwargs) -> Number:
     return Number(match_type, **kwargs)
+
+
+def is_int(**kwargs) -> Number:
+    return is_number(int, **kwargs)
+
+
+def is_float(**kwargs) -> Number:
+    return is_number(float, **kwargs)
 
 
 def one_of(*values: Matcher | Any) -> Or:
@@ -90,6 +106,18 @@ def is_datetime_string(
     max_value: Any = None,
 ) -> DatetimeString:
     return DatetimeString(expected_format, min_value=min_value, max_value=max_value)
+
+
+def is_iso_8601_date(**kwargs) -> DatetimeString:
+    return is_datetime_string("%Y-%m-%d", **kwargs)
+
+
+def is_iso_8601_datetime(**kwargs) -> DatetimeString:
+    return is_datetime_string("%Y-%m-%dT%H:%M:%S", **kwargs)
+
+
+def is_iso_8601_time(**kwargs) -> DatetimeString:
+    return is_datetime_string("%H:%M:%S", **kwargs)
 
 
 def same_value() -> SameValue:

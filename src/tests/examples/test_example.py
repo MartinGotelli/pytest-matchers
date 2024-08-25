@@ -207,6 +207,21 @@ def test_compare_strict_dictionaries():
     )
 
 
+def test_is_string_with_created_datetime_matcher():
+    now = datetime.now()
+    date_format = "%Y-%m-%d %H:%M:%S"
+    now_string = now.strftime(date_format)
+    assert now_string == is_datetime_string(date_format)
+    start_text = f"{now_string}: Martín created this awesome test"
+    assert start_text == is_string(starts_with=is_datetime_string(date_format))
+    end_text = f"Someone decided to add some extra text to the end on: {now_string}"
+    assert end_text == is_string(ends_with=is_datetime_string(date_format))
+    contains_text = f"I once ate a sandwich, was on {now_string}, or maybe two"
+    assert contains_text == is_string(contains=is_datetime_string(date_format))
+    assert start_text == is_string(contains=is_datetime_string(date_format))
+    assert end_text == is_string(contains=is_datetime_string(date_format))
+
+
 def test_uuids():
     assert uuid4() == is_uuid()
     assert str(uuid4()) == is_uuid()

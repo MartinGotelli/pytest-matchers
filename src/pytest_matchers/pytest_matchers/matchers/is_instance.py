@@ -18,3 +18,9 @@ class IsInstance(Matcher):
 
     def concatenated_repr(self) -> str:
         return f"of '{self._match_type.__name__}' instance"
+
+
+def is_instance_matcher(match_type: type | None) -> IsInstance | None:
+    if match_type is None:
+        return None
+    return IsInstance(match_type)

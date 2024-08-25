@@ -47,3 +47,13 @@ class Length(Matcher):
         if length_repr:
             return f"To have length {length_repr}"
         return length_repr
+
+
+def length_matcher(
+    length: int | None,
+    min_length: int | None,
+    max_length: int | None,
+) -> Length | None:
+    if length is None and max_length is None and min_length is None:
+        return None
+    return Length(length, min_length, max_length)

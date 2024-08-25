@@ -1,5 +1,5 @@
 import uuid
-from datetime import datetime
+from datetime import datetime, time
 from unittest.mock import MagicMock
 from uuid import uuid4
 
@@ -19,13 +19,19 @@ from pytest_matchers import (
     is_datetime,
     is_datetime_string,
     is_dict,
+    is_float,
     is_instance,
+    is_int,
+    is_iso_8601_date,
+    is_iso_8601_datetime,
+    is_iso_8601_time,
     is_json,
     is_list,
     is_number,
     is_strict_dict,
     is_string,
     is_uuid,
+    not_empty_string,
     one_of,
     same_value,
 )
@@ -81,6 +87,7 @@ def test_is_list():
 
 def test_is_string():
     assert "string" == is_string()
+    assert "" == is_string()
     assert "string" == is_string(starts_with="s")
     assert "string" == is_string(ends_with="g")
     assert "string" == is_string(contains="ri")
@@ -94,6 +101,14 @@ def test_is_string():
     assert "string" != is_string(length=5)
     assert "string" != is_string(min_length=7)
     assert "string" != is_string(max_length=5)
+
+
+def test_not_empty_string():
+    assert "string" == not_empty_string()
+    assert "" != not_empty_string()
+    assert "string" != not_empty_string(min_length=7)
+    assert "string" != not_empty_string(max_length=5)
+    assert "string" != not_empty_string(min_length=7, max_length=5)
 
 
 def test_is_number():
@@ -110,6 +125,31 @@ def test_is_number():
     assert 3 != is_number(max_value=2)
     assert 3 != is_number(min_value=4, max_value=2)
     assert 3 != is_number(min_value=4, max_value=7)
+
+
+def test_is_int():
+    assert 3 == is_int()
+    assert 3.5 != is_int()
+    assert 3 == is_int(min_value=2)
+    assert 3 == is_int(max_value=4)
+    assert 3 == is_int(min_value=2, max_value=4)
+    assert 3 != is_int(min_value=4)
+    assert 3 != is_int(max_value=2)
+    assert 3 != is_int(min_value=4, max_value=2)
+    assert 3 != is_int(min_value=4, max_value=7)
+
+
+def test_is_float():
+    assert 3.5 == is_float()
+    assert 3 != is_float()
+    assert 3.0 == is_float()
+    assert 3.5 == is_float(min_value=2)
+    assert 3.5 == is_float(max_value=4)
+    assert 3.5 == is_float(min_value=2, max_value=4)
+    assert 3.5 != is_float(min_value=4)
+    assert 3.5 != is_float(max_value=2)
+    assert 3.5 != is_float(min_value=4, max_value=2)
+    assert 3.5 != is_float(min_value=4, max_value=7)
 
 
 def test_one_of():
@@ -188,6 +228,33 @@ def test_is_datetime_string():
         min_value=datetime(2021, 1, 2),
         max_value=datetime(2021, 1, 2),
     )
+
+
+def test_is_iso_8601_datetime():
+    assert "2021-01-01T00:00:00" == is_iso_8601_datetime()
+    assert "2021-01-01T21:00:00" == is_iso_8601_datetime(min_value=datetime(2021, 1, 1))
+    assert "2021-01-01T20:00:00" == is_iso_8601_datetime(max_value=datetime(2021, 1, 2))
+    assert "2021-01-01T15:00:00" == is_iso_8601_datetime(
+        min_value=datetime(2021, 1, 1),
+        max_value=datetime(2021, 1, 2),
+    )
+
+
+def test_is_iso_8601_date():
+    assert "2021-01-01" == is_iso_8601_date()
+    assert "2021-01-01" == is_iso_8601_date(min_value=datetime(2021, 1, 1))
+    assert "2021-01-01" == is_iso_8601_date(max_value=datetime(2021, 1, 1))
+    assert "2021-01-01" == is_iso_8601_date(
+        min_value=datetime(2021, 1, 1),
+        max_value=datetime(2021, 1, 2),
+    )
+
+
+def test_is_iso_8601_time():
+    assert "00:00:00" == is_iso_8601_time()
+    assert "21:00:00" == is_iso_8601_time(min_value=time(20))
+    assert "20:00:00" == is_iso_8601_time(max_value=time(21))
+    assert "15:00:00" == is_iso_8601_time(min_value=time(14), max_value=time(16))
 
 
 def test_same_value():

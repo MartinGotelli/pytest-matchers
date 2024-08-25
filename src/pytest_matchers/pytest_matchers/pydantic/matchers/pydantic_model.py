@@ -6,7 +6,8 @@ from pydantic.v1 import BaseModel as BaseModelV1
 from pydantic.v1.fields import ModelField
 
 from pytest_matchers.matchers import HasAttribute, Matcher
-from pytest_matchers.utils.matcher_utils import is_instance_matcher
+from pytest_matchers.matchers.matcher_factory import matcher
+from pytest_matchers.matchers.is_instance import is_instance_matcher
 from pytest_matchers.utils.repr_utils import concat_reprs
 
 
@@ -39,6 +40,7 @@ def _version(model_class: Type) -> str | None:
     return None
 
 
+@matcher
 class PydanticModel(Matcher):
     def __init__(
         self,
@@ -95,7 +97,7 @@ class PydanticModel(Matcher):
 
     def matches(self, value: Any) -> bool:
         return self._matches_instance(value) and all(
-            matcher == value for matcher in self._attribute_matchers(value)
+            attr_matcher == value for attr_matcher in self._attribute_matchers(value)
         )
 
     def _matches_instance(self, value: Any) -> bool:
