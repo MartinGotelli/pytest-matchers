@@ -22,6 +22,7 @@ from .main import (
     is_number,
     is_strict_dict,
     is_string,
+    is_timestamp,
     is_uuid,
     not_empty_string,
     one_of,

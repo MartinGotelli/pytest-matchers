@@ -21,6 +21,7 @@ from pytest_matchers.matchers import (
     SameValue,
     StrictDict,
     String,
+    Timestamp,
     UUID,
 )
 
@@ -106,6 +107,10 @@ def is_datetime_string(
     max_value: Any = None,
 ) -> DatetimeString:
     return DatetimeString(expected_format, min_value=min_value, max_value=max_value)
+
+
+def is_timestamp(min_value: float | Any = None, max_value: float | Any = None) -> Timestamp:
+    return Timestamp(min_value=min_value, max_value=max_value)
 
 
 def is_iso_8601_date(**kwargs) -> DatetimeString:

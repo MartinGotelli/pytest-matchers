@@ -42,6 +42,9 @@ def test_matches_number():
     matcher = Number()
     assert matcher == 20
     assert matcher == 20.0
+    assert matcher == "20"
+    assert matcher != []  # pylint: disable=use-implicit-booleaness-not-comparison
+    assert matcher != None  # pylint: disable=singleton-comparison
     assert matcher != "string"
     assert matcher != ["string"]
 
@@ -50,6 +53,7 @@ def test_matches_type():
     matcher = Number(int)
     assert matcher == 20
     assert matcher != 20.0
+    assert matcher != "20"
     assert matcher != "string"
     assert matcher != ["string"]
 
