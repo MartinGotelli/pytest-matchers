@@ -11,6 +11,7 @@ from .main import (
     is_datetime,
     is_datetime_string,
     is_dict,
+    is_exception,
     is_float,
     is_instance,
     is_int,

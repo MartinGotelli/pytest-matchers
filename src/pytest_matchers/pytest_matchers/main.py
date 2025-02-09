@@ -10,6 +10,7 @@ from pytest_matchers.matchers import (
     DatetimeString,
     Dict,
     DifferentValue,
+    ExceptionMatcher,
     HasAttribute,
     If,
     IsInstance,
@@ -182,3 +183,12 @@ def is_json(matching: dict = None, *, exclude: list[Any] = None) -> JSON:
 
 def is_uuid(matching_type: Type = None, *, version: int | Matcher = None) -> UUID:
     return UUID(matching_type, version=version)
+
+
+def is_exception(
+    exception_type: Type[Exception] = Exception,
+    message: str | Matcher | None = None,
+    *,
+    match_subclass: bool = False,
+) -> ExceptionMatcher:
+    return ExceptionMatcher(exception_type, message, match_subclass)
