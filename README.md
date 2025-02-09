@@ -80,3 +80,4 @@ Actual   :0.9048172867693559
 - `is_strict_dict`
 - `is_json`
 - `is_uuid`
+- `is_exception`

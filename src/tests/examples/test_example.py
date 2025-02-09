@@ -10,12 +10,12 @@ from pytest_matchers import (
     between,
     case,
     different_value,
-    has_attribute,
     if_false,
     if_true,
     is_datetime,
     is_datetime_string,
     is_dict,
+    is_exception,
     is_instance,
     is_list,
     is_number,
@@ -55,18 +55,18 @@ def test_dict_comparison():
     assert value != {"string": is_instance(str), "int": is_instance(int)}
 
 
-def test_mock_log_exception():
-    def _logging_function(logging):
+def test_exception_logging():
+    def _logging_function(logging, message: str):
         try:
-            raise ValueError("This is a test exception")
+            raise ValueError(message)
         except ValueError as error:
             logging.exception("Caught exception: %s", error)
 
     mock_logging = MagicMock()
-    _logging_function(mock_logging)
+    _logging_function(mock_logging, "This is an unexpected exception")
     mock_logging.exception.assert_called_with(
         "Caught exception: %s",
-        is_instance(ValueError) & has_attribute("args", ("This is a test exception",)),
+        is_exception(ValueError, message=is_string(contains="unexpected")),
     )
 
 

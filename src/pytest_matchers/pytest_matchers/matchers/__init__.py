@@ -27,3 +27,4 @@ from .json import JSON
 from .strict_dict import StrictDict
 from .uuid import UUID
 from .timestamp import Timestamp
+from .exception import ExceptionMatcher

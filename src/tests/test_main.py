@@ -19,6 +19,7 @@ from pytest_matchers import (
     is_datetime,
     is_datetime_string,
     is_dict,
+    is_exception,
     is_float,
     is_instance,
     is_int,
@@ -385,3 +386,14 @@ def test_is_uuid():
     assert str(uuid4()) == is_uuid()
     assert str(uuid4()) == is_uuid(str)
     assert str(uuid4()) != is_uuid(uuid.UUID)
+
+
+def test_is_exception():
+    assert Exception() == is_exception()
+    assert Exception("message") == is_exception(message="message")
+    assert Exception("message") == is_exception(Exception, "message")
+    assert Exception("message") != is_exception(ValueError, "message")
+    assert Exception("message") != is_exception(Exception, "another_message")
+    assert ValueError("message") == is_exception(ValueError, "message")
+    assert ValueError("message") != is_exception(Exception, "message")
+    assert ValueError("message") == is_exception(Exception, match_subclass=True)
