@@ -1,10 +1,15 @@
-[tool.poetry]
+[project]
 name = "pytest-matchers"
 version = "0.3.2"
 description = "Matchers for pytest"
 license = "MIT"
-authors = ["MartinGotelli <martingotelliferenaz@gmail.com>"]
+authors = [
+    { name = "Martín Gotelli Ferenaz", email = "martingotelliferenaz@gmail.com" },
+]
 readme = "README.md"
+
+
+[tool.poetry]
 packages = [
     { include = "pytest_matchers", from = "src/pytest_matchers" }
 ]
