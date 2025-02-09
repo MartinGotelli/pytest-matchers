@@ -1,7 +1,5 @@
 import os
 
-from pytest_matchers import plugin
-
 os.environ["PYTEST_MATCHERS_WARNINGS"] = "False"
 
 
