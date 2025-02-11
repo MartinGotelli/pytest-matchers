@@ -4,7 +4,10 @@ from random import random
 from unittest.mock import MagicMock
 from uuid import NAMESPACE_DNS, uuid3, uuid4, uuid5
 
+from cryptography.fernet import Fernet
+
 from pytest_matchers import (
+    after_applying_is,
     anything,
     assert_match,
     between,
@@ -255,3 +258,20 @@ def test_pydantic():
     assert_match(lassie, is_pydantic(Dog, age=3, name="Lassie", breed="Collie"))
     assert_match(tweety, is_pydantic(age=1))
     assert_match(messi, is_pydantic(Human, age=33, strict=False))
+
+
+def test_symmetric_hash():
+    key = Fernet.generate_key()
+    cipher = Fernet(key)
+
+    def _encrypt(value):
+        return cipher.encrypt(value.encode()).decode()
+
+    def _decrypt(value):
+        return cipher.decrypt(value.encode()).decode()
+
+    encoded_hey = _encrypt("hey")
+    encoded_hello = _encrypt("hello")
+    assert _encrypt("hey") != encoded_hey
+    assert encoded_hey == after_applying_is(_decrypt, "hey")
+    assert encoded_hello != after_applying_is(_decrypt, "hey")

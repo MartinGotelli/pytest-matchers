@@ -1,6 +1,7 @@
 from typing import Any, Callable, Type
 
 from pytest_matchers.matchers import (
+    AfterApplying,
     And,
     Anything,
     Between,
@@ -192,3 +193,7 @@ def is_exception(
     match_subclass: bool = False,
 ) -> ExceptionMatcher:
     return ExceptionMatcher(exception_type, message, match_subclass)
+
+
+def after_applying_is(function: Callable, expected_value: Any | Matcher) -> AfterApplying:
+    return AfterApplying(function, expected_value)

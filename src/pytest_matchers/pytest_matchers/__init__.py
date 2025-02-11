@@ -1,5 +1,6 @@
 from .asserts.asserts import assert_match, assert_not_match
 from .main import (
+    after_applying_is,
     anything,
     between,
     case,

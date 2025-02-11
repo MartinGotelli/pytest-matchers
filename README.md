@@ -81,3 +81,4 @@ Actual   :0.9048172867693559
 - `is_json`
 - `is_uuid`
 - `is_exception`
+- `after_applying_is`
