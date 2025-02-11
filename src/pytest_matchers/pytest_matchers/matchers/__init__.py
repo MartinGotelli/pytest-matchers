@@ -28,3 +28,4 @@ from .strict_dict import StrictDict
 from .uuid import UUID
 from .timestamp import Timestamp
 from .exception import ExceptionMatcher
+from .after_applying import AfterApplying

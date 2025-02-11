@@ -6,6 +6,7 @@ from uuid import uuid4
 import pytest
 
 from pytest_matchers import (
+    after_applying_is,
     anything,
     assert_match,
     assert_not_match,
@@ -397,3 +398,13 @@ def test_is_exception():
     assert ValueError("message") == is_exception(ValueError, "message")
     assert ValueError("message") != is_exception(Exception, "message")
     assert ValueError("message") == is_exception(Exception, match_subclass=True)
+
+
+def test_after_applying_is():
+    def _plus_1(x):
+        return x + 1
+
+    assert 4 == after_applying_is(lambda x: x - 1, 3)
+    assert 4 == after_applying_is(_plus_1, is_number())
+    assert 4 == after_applying_is(str, is_string())
+    assert "4" != after_applying_is(_plus_1, is_number())
