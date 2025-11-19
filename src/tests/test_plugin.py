@@ -1,3 +1,5 @@
+import re
+
 import pytest
 
 from pytest_matchers import is_instance, is_string
@@ -44,6 +46,10 @@ def _expected_list_diff(results: list) -> str:
     message.extend(batch_adds)
     message.append("  ]")
     return "\n  ".join(message)
+
+
+def _strip_ansi_codes(s):
+    return re.sub(r"\x1b\[[0-9;]*[mGKF]", "", s)
 
 
 @pytest.mark.skipif(
@@ -158,7 +164,9 @@ def test_custom_assert_repr_dictionary_matcher_replace():
     try:
         assert actual == expected
     except AssertionError as error:
-        assert str(error) == _expected_base(actual, expected, "==") + expected_diff
+        assert (
+            _strip_ansi_codes(str(error)) == _expected_base(actual, expected, "==") + expected_diff
+        )
 
 
 def test_custom_assert_repr_list():
@@ -182,9 +190,9 @@ def test_custom_assert_repr_list_matcher_replace():
     try:
         assert actual == expected
     except AssertionError as error:
-        assert str(error) == _expected_base(actual, expected, "==") + _expected_list_diff(
-            ["hey", (custom, is_instance(str))]
-        )
+        assert _strip_ansi_codes(str(error)) == _expected_base(
+            actual, expected, "=="
+        ) + _expected_list_diff(["hey", (custom, is_instance(str))])
 
 
 def test_not_equal_operator():
