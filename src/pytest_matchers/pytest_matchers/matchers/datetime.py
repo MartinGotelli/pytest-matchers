@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pytest_matchers.matchers import Matcher
+from pytest_matchers.matchers.base import Matcher
 from pytest_matchers.matchers.between import between_matcher
 from pytest_matchers.matchers.has_attribute import has_attribute_matcher
 from pytest_matchers.matchers.is_instance import is_instance_matcher

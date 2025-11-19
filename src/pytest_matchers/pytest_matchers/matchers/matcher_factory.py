@@ -5,7 +5,7 @@ try:
 except ImportError:  # pragma: no cover
     from pprint import PrettyPrinter
 
-from pytest_matchers.matchers import Matcher
+from pytest_matchers.matchers.base import Matcher
 
 
 def _print_matcher(

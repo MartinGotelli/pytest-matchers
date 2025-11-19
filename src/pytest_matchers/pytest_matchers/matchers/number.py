@@ -1,6 +1,6 @@
 from typing import Any, Type
 
-from pytest_matchers.matchers import Matcher
+from pytest_matchers.matchers.base import Matcher
 from pytest_matchers.matchers.between import between_matcher
 from pytest_matchers.matchers.is_instance import is_instance_matcher
 from pytest_matchers.matchers.matcher_factory import matcher
