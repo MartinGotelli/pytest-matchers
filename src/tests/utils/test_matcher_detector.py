@@ -1,5 +1,6 @@
-from pytest_matchers import is_instance
 from pytest_matchers.utils.matcher_detector import MatcherDetector
+
+from pytest_matchers import is_instance
 
 
 def test_uses_matcher():

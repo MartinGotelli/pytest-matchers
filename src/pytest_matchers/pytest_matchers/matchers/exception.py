@@ -1,6 +1,6 @@
 from builtins import Exception
 
-from pytest_matchers.matchers import Matcher
+from pytest_matchers.matchers.base import Matcher
 from pytest_matchers.utils.matcher_utils import as_matcher_or_none, matches_or_none
 from pytest_matchers.utils.repr_utils import concat_matcher_repr
 

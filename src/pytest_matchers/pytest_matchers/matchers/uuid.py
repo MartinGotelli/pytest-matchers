@@ -1,13 +1,13 @@
 import uuid
 from typing import Any, Type
 
-from pytest_matchers.matchers import Matcher
+from pytest_matchers.matchers.base import Matcher
+from pytest_matchers.matchers.is_instance import is_instance_matcher
 from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.utils.matcher_utils import (
     as_matcher_or_none,
     matches_or_none,
 )
-from pytest_matchers.matchers.is_instance import is_instance_matcher
 from pytest_matchers.utils.repr_utils import concat_matcher_repr, concat_reprs
 
 

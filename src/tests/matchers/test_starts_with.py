@@ -1,6 +1,7 @@
-from pytest_matchers import is_number, is_string, one_of
 from pytest_matchers.matchers import StartsWith
 from pytest_matchers.matchers.starts_with import starts_with_matcher
+
+from pytest_matchers import is_number, is_string, one_of
 
 
 def test_create():

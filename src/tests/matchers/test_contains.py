@@ -1,8 +1,8 @@
 import pytest
-
-from pytest_matchers import is_string, one_of
 from pytest_matchers.matchers import Contains
 from pytest_matchers.matchers.contains import contains_matcher
+
+from pytest_matchers import is_string, one_of
 
 
 def test_create():

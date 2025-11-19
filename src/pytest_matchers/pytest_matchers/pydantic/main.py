@@ -2,7 +2,6 @@ from typing import Type
 
 from pydantic import BaseModel
 from pydantic.v1 import BaseModel as BaseModelV1
-
 from pytest_matchers.pydantic.matchers import PydanticModel
 
 

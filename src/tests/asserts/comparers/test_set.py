@@ -1,7 +1,8 @@
 from unittest.mock import MagicMock
 
-from pytest_matchers import is_number, is_string, one_of
 from pytest_matchers.asserts.comparers.set import SetComparer
+
+from pytest_matchers import is_number, is_string, one_of
 
 
 def test_compare():

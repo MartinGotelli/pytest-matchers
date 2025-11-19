@@ -1,6 +1,7 @@
 from typing import Any, Callable
 
-from pytest_matchers.matchers import Eq, Matcher
+from pytest_matchers.matchers.base import Matcher
+from pytest_matchers.matchers.eq import Eq
 
 
 def as_matcher(value: Matcher | Any) -> Matcher:

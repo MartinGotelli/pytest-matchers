@@ -1,7 +1,8 @@
 from uuid import NAMESPACE_DNS, uuid3, uuid4
 
-from pytest_matchers import one_of
 from pytest_matchers.matchers import UUID
+
+from pytest_matchers import one_of
 
 
 def test_create():

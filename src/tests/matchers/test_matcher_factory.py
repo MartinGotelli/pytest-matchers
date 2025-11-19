@@ -1,5 +1,4 @@
 import pytest
-
 from pytest_matchers.matchers import MatcherFactory
 from pytest_matchers.matchers.matcher_factory import matcher
 

@@ -1,6 +1,6 @@
 from typing import Any, Callable
 
-from pytest_matchers.matchers import Matcher
+from pytest_matchers.matchers.base import Matcher
 from pytest_matchers.utils.matcher_utils import as_matcher
 from pytest_matchers.utils.repr_utils import concat_reprs
 

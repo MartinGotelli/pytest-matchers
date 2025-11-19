@@ -3,7 +3,7 @@ from typing import Any
 from pytest_matchers.asserts.comparers.dict import DictComparer
 from pytest_matchers.asserts.comparers.list import ListComparer
 from pytest_matchers.asserts.comparers.set import SetComparer
-from pytest_matchers.matchers import Matcher
+from pytest_matchers.matchers.base import Matcher
 
 
 class Comparer:

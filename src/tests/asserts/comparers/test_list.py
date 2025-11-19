@@ -1,7 +1,8 @@
 from unittest.mock import MagicMock
 
-from pytest_matchers import is_number
 from pytest_matchers.asserts.comparers.list import ListComparer
+
+from pytest_matchers import is_number
 
 
 def test_compare():

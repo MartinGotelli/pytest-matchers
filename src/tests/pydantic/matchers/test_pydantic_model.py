@@ -1,8 +1,8 @@
 import pytest
 from pydantic import BaseModel
+from pytest_matchers.pydantic.matchers import PydanticModel
 
 from pytest_matchers import anything, is_list, is_number, is_string
-from pytest_matchers.pydantic.matchers import PydanticModel
 from src.tests.pydantic.conftest import MoneyPersonV2, PersonV1, PersonV2
 
 

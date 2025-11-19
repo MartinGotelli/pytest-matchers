@@ -1,5 +1,4 @@
 import pytest
-
 from pytest_matchers.matchers import Number
 
 

@@ -1,5 +1,6 @@
-from pytest_matchers import anything, is_number, is_string
 from pytest_matchers.matchers import Dict
+
+from pytest_matchers import anything, is_number, is_string
 
 
 def test_create():

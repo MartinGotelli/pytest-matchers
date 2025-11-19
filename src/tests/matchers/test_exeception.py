@@ -1,5 +1,6 @@
-from pytest_matchers import is_string
 from pytest_matchers.matchers import ExceptionMatcher
+
+from pytest_matchers import is_string
 
 
 def test_create():

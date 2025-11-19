@@ -4,10 +4,9 @@ from pydantic import BaseModel
 from pydantic.fields import FieldInfo
 from pydantic.v1 import BaseModel as BaseModelV1
 from pydantic.v1.fields import ModelField
-
 from pytest_matchers.matchers import HasAttribute, Matcher
-from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.matchers.is_instance import is_instance_matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.utils.repr_utils import concat_reprs
 
 
@@ -18,7 +17,7 @@ def _model_fields(model_class: Type[BaseModel | BaseModelV1]):
 
 
 def _is_required(field: FieldInfo | ModelField) -> bool:
-    if isinstance(field, ModelField):
+    if isinstance(field, ModelField) or not hasattr(field, "is_required"):
         return field.required
     return field.is_required()
 
