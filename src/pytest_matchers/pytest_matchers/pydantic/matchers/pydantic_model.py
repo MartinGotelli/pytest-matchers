@@ -17,7 +17,7 @@ def _model_fields(model_class: Type[BaseModel | BaseModelV1]):
 
 
 def _is_required(field: FieldInfo | ModelField) -> bool:
-    if isinstance(field, ModelField):
+    if isinstance(field, ModelField) or not hasattr(field, "is_required"):
         return field.required
     return field.is_required()
 
