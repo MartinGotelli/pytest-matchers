@@ -1,5 +1,6 @@
-from pytest_matchers import is_number, is_string
 from pytest_matchers.matchers import If
+
+from pytest_matchers import is_number, is_string
 
 
 def test_create():

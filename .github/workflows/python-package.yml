@@ -52,3 +52,6 @@ jobs:
     - name: Format check with black
       run: |
         make black
+    - name: Format check with isort
+      run: |
+        make isort

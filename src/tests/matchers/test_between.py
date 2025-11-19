@@ -1,5 +1,4 @@
 import pytest
-
 from pytest_matchers.matchers import Between, Eq
 from pytest_matchers.matchers.between import between_matcher
 

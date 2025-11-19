@@ -1,5 +1,4 @@
 import pytest
-
 from pytest_matchers.matchers import Length
 from pytest_matchers.matchers.length import length_matcher
 

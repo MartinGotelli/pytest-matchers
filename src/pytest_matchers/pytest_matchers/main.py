@@ -1,6 +1,8 @@
 from typing import Any, Callable, Type
 
 from pytest_matchers.matchers import (
+    JSON,
+    UUID,
     AfterApplying,
     And,
     Anything,
@@ -15,7 +17,6 @@ from pytest_matchers.matchers import (
     HasAttribute,
     If,
     IsInstance,
-    JSON,
     List,
     Matcher,
     Number,
@@ -24,7 +25,6 @@ from pytest_matchers.matchers import (
     StrictDict,
     String,
     Timestamp,
-    UUID,
 )
 
 

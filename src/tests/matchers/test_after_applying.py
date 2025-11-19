@@ -1,5 +1,6 @@
-from pytest_matchers import is_number
 from pytest_matchers.matchers import AfterApplying
+
+from pytest_matchers import is_number
 
 
 def _plus_2(value: int) -> int:

@@ -1,6 +1,5 @@
 # pylint: disable=use-implicit-booleaness-not-comparison
 import pytest
-
 from pytest_matchers.matchers import List
 
 

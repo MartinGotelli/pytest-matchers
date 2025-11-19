@@ -1,7 +1,8 @@
 from unittest.mock import MagicMock
 
-from pytest_matchers import is_list, is_string
 from pytest_matchers.matchers.has_attribute import HasAttribute, has_attribute_matcher
+
+from pytest_matchers import is_list, is_string
 
 
 class WithAttributeMethod:

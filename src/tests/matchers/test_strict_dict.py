@@ -1,7 +1,7 @@
 import pytest
+from pytest_matchers.matchers import StrictDict
 
 from pytest_matchers import is_number, is_string
-from pytest_matchers.matchers import StrictDict
 
 
 def test_create():

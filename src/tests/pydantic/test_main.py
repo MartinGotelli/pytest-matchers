@@ -1,11 +1,11 @@
 import pydantic
 import pytest
 from packaging import version
-
-from pytest_matchers import anything, assert_match, is_string
 from pytest_matchers.main import contains
 from pytest_matchers.pydantic.main import is_pydantic, is_pydantic_v1
 from pytest_matchers.pydantic.matchers import PydanticModel
+
+from pytest_matchers import anything, assert_match, is_string
 from src.tests.pydantic.conftest import PersonV1, PersonV2
 
 if version.parse(pydantic.__version__) < version.parse("2.0"):  # pragma: no cover

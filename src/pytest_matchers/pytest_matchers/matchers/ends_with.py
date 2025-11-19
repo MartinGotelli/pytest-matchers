@@ -1,4 +1,5 @@
-from typing import Any, Sized
+from collections.abc import Sized
+from typing import Any
 
 from pytest_matchers.matchers import Matcher
 from pytest_matchers.matchers.matcher_factory import matcher

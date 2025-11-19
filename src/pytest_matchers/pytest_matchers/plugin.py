@@ -1,7 +1,6 @@
 from typing import Any
 
 import pytest
-
 from pytest_matchers.matchers import Matcher
 from pytest_matchers.utils.matcher_detector import MatcherDetector
 

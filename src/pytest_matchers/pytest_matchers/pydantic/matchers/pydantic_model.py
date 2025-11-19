@@ -4,10 +4,9 @@ from pydantic import BaseModel
 from pydantic.fields import FieldInfo
 from pydantic.v1 import BaseModel as BaseModelV1
 from pydantic.v1.fields import ModelField
-
 from pytest_matchers.matchers import HasAttribute, Matcher
-from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.matchers.is_instance import is_instance_matcher
+from pytest_matchers.matchers.matcher_factory import matcher
 from pytest_matchers.utils.repr_utils import concat_reprs
 
 

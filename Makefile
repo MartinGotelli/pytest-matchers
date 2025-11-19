@@ -34,10 +34,17 @@ install_shell_support:
 quality: lint vulture spell black compat-coverage coverage
 
 format:
+	@make format_imports
 	black $(FOLDERS)
 
 black:
 	black -q --check $(FOLDERS)
+
+isort:
+	isort -q --check-only $(FOLDERS)
+
+format_imports:
+	isort $(FOLDERS)
 
 coverage:
 	coverage run && coverage report --skip-covered
