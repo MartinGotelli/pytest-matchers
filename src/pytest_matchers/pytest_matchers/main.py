@@ -36,7 +36,7 @@ def is_instance(match_type: Type) -> IsInstance:
     return IsInstance(match_type)
 
 
-def is_list(match_type: Type = None, **kwargs) -> List | IsInstance:
+def is_list(match_type: Type | Matcher | None = None, **kwargs) -> List | IsInstance:
     if match_type is None and not kwargs:
         return is_instance(list)
     return List(match_type, **kwargs)

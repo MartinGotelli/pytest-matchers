@@ -31,6 +31,11 @@ def test_repr():
     assert repr(matcher) == "To be a list of 'int' instance and with length between 2 and 4"
     matcher = List(None, length=2)
     assert repr(matcher) == "To be a list with length of 2"
+    matcher = List(List(int), min_length=2)
+    assert (
+        repr(matcher)
+        == "To be a list of lists of 'int' instance and with length greater or equal than 2"
+    )
 
 
 def test_matches_type():
@@ -74,3 +79,11 @@ def test_matches_max_length():
     assert matcher == [1, 2]
     assert matcher != [1, 2, 3]
     assert matcher != [1, 2, 3, 4]
+
+
+def test_matches_with_custom_matcher():
+    matcher = List(List(int, length=2), length=2)
+    assert matcher == [[1, 2], [3, 4]]
+    assert matcher != [[1, 2, 3], [4, 5]]
+    assert matcher != [[1, 2], [3, 4], [5, 6]]
+    assert matcher != [[1, 2], "not a list"]

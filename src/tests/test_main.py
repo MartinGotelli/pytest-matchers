@@ -85,6 +85,8 @@ def test_is_list():
     assert [1, 2, 3] != is_list(int, min_length=4)
     assert [1, 2, 3] == is_list(int, max_length=4)
     assert [1, 2, 3] != is_list(int, max_length=2)
+    assert ["ab", "bc", "cc"] != is_list(is_string(starts_with="c"))
+    assert ["ca", "cb", "cc"] == is_list(is_string(starts_with="c"))
     assert ["abc"] == is_list()
 
 
