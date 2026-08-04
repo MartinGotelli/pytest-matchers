@@ -8,8 +8,8 @@ from pytest_matchers.matchers.matcher_factory import matcher
 class Length(Matcher):
     def __init__(self, length=None, min_length=None, max_length=None):
         super().__init__()
-        if length:
-            if min_length or max_length:
+        if length is not None:
+            if min_length is not None or max_length is not None:
                 raise ValueError("Cannot specify length with min_length or max_length")
             min_length = length
             max_length = length
@@ -21,8 +21,8 @@ class Length(Matcher):
             value_length = len(value)
         except TypeError:
             return False
-        matches_min = self._min_length <= value_length if self._min_length else True
-        matches_max = value_length <= self._max_length if self._max_length else True
+        matches_min = self._min_length <= value_length if self._min_length is not None else True
+        matches_max = value_length <= self._max_length if self._max_length is not None else True
         return matches_min and matches_max
 
     def _length_repr(self) -> str:
