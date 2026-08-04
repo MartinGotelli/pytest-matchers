@@ -59,6 +59,14 @@ def test_matches_exact_length():
     assert matcher != "string"
 
 
+def test_matches_exact_length_zero():
+    matcher = String(length=0)
+    assert matcher == ""
+    assert matcher != "a"
+    assert matcher != 20
+    assert matcher != None  # pylint: disable=singleton-comparison
+
+
 def test_matches_min_and_max_length():
     matcher = String(min_length=1, max_length=3)
     assert matcher == "a"

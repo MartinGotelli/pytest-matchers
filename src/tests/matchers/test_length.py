@@ -17,10 +17,18 @@ def test_create():
     ):
         Length(length=1, min_length=1)
 
+    with pytest.raises(
+        ValueError,
+        match="Cannot specify length with min_length or max_length",
+    ):
+        Length(length=0, min_length=1)
+
 
 def test_repr():
     matcher = Length()
     assert repr(matcher) == ""
+    matcher = Length(length=0)
+    assert repr(matcher) == "To have length of 0"
     matcher = Length(length=1)
     assert repr(matcher) == "To have length of 1"
     matcher = Length(min_length=1, max_length=3)
@@ -52,6 +60,21 @@ def test_matches_exact_length():
     assert not matcher.matches([])
     assert not matcher.matches([1, 2])
     assert not matcher.matches("string")
+
+
+def test_matches_exact_length_zero():
+    matcher = Length(length=0)
+    assert matcher.matches("")
+    assert matcher.matches([])
+    assert not matcher.matches("a")
+    assert not matcher.matches([1])
+
+
+def test_matches_min_length_zero():
+    matcher = Length(min_length=0, max_length=3)
+    assert matcher.matches("")
+    assert matcher.matches("abc")
+    assert not matcher.matches("abcd")
 
 
 def test_matches_min_and_max_length():
